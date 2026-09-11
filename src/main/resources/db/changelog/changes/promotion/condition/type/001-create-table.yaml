@@ -1,0 +1,62 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1785085320542-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: promotion
+            tableName: condition_types
+            remarks: Defines available promotion condition types.
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: code
+                  type: ${name.type}
+                  remarks: Immutable business identifier.
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: title
+                  type: ${name.type}
+                  remarks: Human-readable display name.
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: description
+                  type: ${description.type}
+                  remarks: Optional description.
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: updated_at
+                  type: ${timestamp_value.type}
+                  constraints:
+                    nullable: true
+
+        - addPrimaryKey:
+            schemaName: promotion
+            tableName: condition_types
+            columnNames: id
+            constraintName: pk_condition_types
+
+        - addUniqueConstraint:
+            schemaName: promotion
+            tableName: condition_types
+            columnNames: code
+            constraintName: uk_condition_types_code

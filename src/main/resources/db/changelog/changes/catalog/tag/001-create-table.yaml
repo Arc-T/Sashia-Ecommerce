@@ -1,0 +1,56 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1784212779080-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: catalog
+            tableName: tags
+            remarks: Stores tags for catalog items.
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: item_type
+                  type: ${name.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: name
+                  type: ${name.type}
+                  remarks: Supports Persian names.
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+        - addPrimaryKey:
+            schemaName: catalog
+            tableName: tags
+            columnNames: id
+            constraintName: pk_tags
+
+        - addUniqueConstraint:
+            schemaName: catalog
+            tableName: tags
+            columnNames: name
+            constraintName: uk_tags_name
+
+        - createIndex:
+            schemaName: catalog
+            tableName: tags
+            indexName: idx_tags_item_type
+            columns:
+              - column:
+                  name: item_type

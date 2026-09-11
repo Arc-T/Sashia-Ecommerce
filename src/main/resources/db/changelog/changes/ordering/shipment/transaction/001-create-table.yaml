@@ -1,0 +1,89 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1784286890318-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: ordering
+            tableName: shipment_transactions
+            remarks: Stores the chronological history of shipment status changes.
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: shipment_id
+                  type: ${id.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: shipment_status_id
+                  type: ${id.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: description
+                  type: ${description.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+        - addPrimaryKey:
+            schemaName: ordering
+            tableName: shipment_transactions
+            columnNames: id
+            constraintName: pk_shipment_transactions
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: ordering
+            baseTableName: shipment_transactions
+            baseColumnNames: shipment_id
+            referencedTableSchemaName: ordering
+            referencedTableName: shipments
+            referencedColumnNames: id
+            constraintName: fk_shipment_transactions_shipment
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: ordering
+            baseTableName: shipment_transactions
+            baseColumnNames: shipment_status_id
+            referencedTableSchemaName: ordering
+            referencedTableName: shipment_statuses
+            referencedColumnNames: id
+            constraintName: fk_shipment_transactions_status
+
+        - createIndex:
+            schemaName: ordering
+            tableName: shipment_transactions
+            indexName: idx_shipment_transactions_shipment
+            columns:
+              - column:
+                  name: shipment_id
+
+        - createIndex:
+            schemaName: ordering
+            tableName: shipment_transactions
+            indexName: idx_shipment_transactions_status
+            columns:
+              - column:
+                  name: shipment_status_id
+
+        - createIndex:
+            schemaName: ordering
+            tableName: shipment_transactions
+            indexName: idx_shipment_transactions_created_at
+            columns:
+              - column:
+                  name: created_at

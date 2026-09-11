@@ -1,0 +1,228 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1784286904158-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: ordering
+            tableName: orders
+            remarks: Stores customer orders and their pricing and delivery snapshots.
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: user_id
+                  type: ${id.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: item_delivery_option_id
+                  type: ${id.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: item_type
+                  type: ${short_text.type}
+                  remarks: indicates which type of item (Service offering, product etc ...) is being ordered.
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: order_number
+                  type: ${short_text.type}
+                  constraints:
+                    nullable: false
+
+              # ===================== PRICING =====================
+
+              - column:
+                  name: currency
+                  type: ${name.type}
+                  remarks: Currency enum (USD, EUR, AZN, IRR, etc.)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: subtotal
+                  type: ${price.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: shipping_cost
+                  type: ${price.type}
+                  defaultValueNumeric: '0'
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: tax
+                  type: ${price.type}
+                  defaultValueNumeric: '0'
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: additional_charges
+                  type: ${price.type}
+                  defaultValueNumeric: '0'
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: discount
+                  type: ${price.type}
+                  defaultValueNumeric: '0'
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: total
+                  type: ${price.type}
+                  constraints:
+                    nullable: false
+
+              # ===================== DELIVERY =====================
+
+              - column:
+                  name: delivery_address
+                  type: ${description.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: receiver_name
+                  type: ${name.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: receiver_phone
+                  type: ${name.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: receiver_email
+                  type: ${name.type}
+                  constraints:
+                    nullable: true
+
+              # ===================== ORDER INFO =====================
+
+              - column:
+                  name: status
+                  type: ${name.type}
+                  remarks: Order status enum.
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: user_note
+                  type: ${description.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: description
+                  type: ${description.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: updated_at
+                  type: ${timestamp_value.type}
+                  constraints:
+                    nullable: true
+
+        - addPrimaryKey:
+            schemaName: ordering
+            tableName: orders
+            columnNames: id
+            constraintName: pk_orders
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: ordering
+            baseTableName: orders
+            baseColumnNames: user_id
+            referencedTableSchemaName: identity
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_orders_user
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: ordering
+            baseTableName: orders
+            baseColumnNames: item_delivery_option_id
+            referencedTableSchemaName: catalog
+            referencedTableName: item_delivery_options
+            referencedColumnNames: id
+            constraintName: fk_orders_delivery_option
+
+        - addUniqueConstraint:
+            schemaName: ordering
+            tableName: orders
+            columnNames: order_number
+            constraintName: uk_orders_order_number
+
+        - createIndex:
+            schemaName: ordering
+            tableName: orders
+            indexName: idx_orders_user
+            columns:
+              - column:
+                  name: user_id
+
+        - createIndex:
+            schemaName: ordering
+            tableName: orders
+            indexName: idx_orders_item_delivery_option
+            columns:
+              - column:
+                  name: item_delivery_option_id
+
+        - createIndex:
+            schemaName: ordering
+            tableName: orders
+            indexName: idx_orders_item_type
+            columns:
+              - column:
+                  name: item_type
+
+        - createIndex:
+            schemaName: ordering
+            tableName: orders
+            indexName: idx_orders_status
+            columns:
+              - column:
+                  name: status
+
+        - createIndex:
+            schemaName: ordering
+            tableName: orders
+            indexName: idx_orders_currency
+            columns:
+              - column:
+                  name: currency
+
+        - createIndex:
+            schemaName: ordering
+            tableName: orders
+            indexName: idx_orders_created_at
+            columns:
+              - column:
+                  name: created_at

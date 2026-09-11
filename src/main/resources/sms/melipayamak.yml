@@ -1,0 +1,9 @@
+MELIPAYAMAK:
+  USERNAME:
+    test
+  PASSWORD:
+    password
+  URL:
+    https://rest.payamak-panel.com/api/SendSMS/SendSMS
+  FROM:
+    taha

@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1785176798024-1
+      author: Mr.Arc-T
+      changes:
+        - insert:
+            schemaName: identity
+            tableName: users
+            columns:
+              - column: { name: first_name, value: 'طه' }
+              - column: { name: last_name, value: 'حاجی وند' }
+              - column: { name: email, value: 'hajivandtaha@gmail.com' }
+              - column: { name: phone, value: '361629708' }
+              - column: { name: password, value: '$2a$12$L/OwMC1/4iAtR06GmKbvbOjisk6MbtTM8kex5PrGjuyQOxNv06akm' }
+              - column: { name: user_group_id, valueNumeric: '1' }
+              - column: { name: gender, value: 'MALE' }
+              - column: { name: description, value: 'A passionate tech enthusiast and entrepreneur.' }

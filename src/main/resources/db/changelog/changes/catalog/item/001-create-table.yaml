@@ -1,0 +1,99 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1784387436057-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: catalog
+            tableName: items
+            remarks: Stores catalog items which are purchasable including products and services.
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: category_id
+                  type: ${id.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: item_type
+                  type: ${name.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: title
+                  type: ${name.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: is_featured
+                  type: ${boolean.type}
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: updated_at
+                  type: ${timestamp_value.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: deleted_at
+                  type: ${timestamp_value.type}
+                  constraints:
+                    nullable: true
+
+        - addPrimaryKey:
+            schemaName: catalog
+            tableName: items
+            columnNames: id
+            constraintName: pk_items
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: catalog
+            baseTableName: items
+            baseColumnNames: category_id
+            referencedTableSchemaName: catalog
+            referencedTableName: categories
+            referencedColumnNames: id
+            constraintName: fk_items_category
+
+        - createIndex:
+            schemaName: catalog
+            tableName: items
+            indexName: idx_items_category
+            columns:
+              - column:
+                  name: category_id
+
+        - createIndex:
+            schemaName: catalog
+            tableName: items
+            indexName: idx_items_item_type
+            columns:
+              - column:
+                  name: item_type
+
+        - createIndex:
+            schemaName: catalog
+            tableName: items
+            indexName: idx_items_is_featured
+            columns:
+              - column:
+                  name: is_featured

@@ -1,0 +1,53 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1767965041218-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: identity
+            tableName: user_groups
+            remarks: Groups users for role assignment
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: name
+                  type: ${name.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: description
+                  type: ${short_text.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: updated_at
+                  type: ${timestamp_value.type}
+                  constraints:
+                    nullable: true
+
+        - addPrimaryKey:
+            schemaName: identity
+            tableName: user_groups
+            columnNames: id
+            constraintName: pk_user_groups
+
+        - addUniqueConstraint:
+            schemaName: identity
+            tableName: user_groups
+            columnNames: name
+            constraintName: uk_user_groups_name

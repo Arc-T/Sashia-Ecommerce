@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1786964813095-1
+      author: Mr.Arc-T
+      changes:
+        - insert:
+            schemaName: catalog
+            tableName: items
+            columns:
+              - column: { name: currency, value: 'IRR' }
+              - column: { name: unit_price, valueNumeric: '63000' }
+
+        - insert:
+            schemaName: catalog
+            tableName: items
+            columns:
+              - column: { name: currency, value: 'USD' }
+              - column: { name: unit_price, valueNumeric: '8' }
+

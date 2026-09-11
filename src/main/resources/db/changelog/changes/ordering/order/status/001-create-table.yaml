@@ -1,0 +1,97 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1784293793275-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: ordering
+            tableName: order_statuses
+            remarks: Stores available order statuses.
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: name
+                  type: ${name.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: type
+                  type: ${name.type}
+                  remarks: Order status type enum.
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: description
+                  type: ${description.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: active
+                  type: ${boolean.type}
+                  defaultValueBoolean: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: updated_at
+                  type: ${timestamp_value.type}
+                  constraints:
+                    nullable: true
+
+        - addPrimaryKey:
+            schemaName: ordering
+            tableName: order_statuses
+            columnNames: id
+            constraintName: pk_order_statuses
+
+        - addUniqueConstraint:
+            schemaName: ordering
+            tableName: order_statuses
+            columnNames: name
+            constraintName: uk_order_statuses_name
+
+        - addUniqueConstraint:
+            schemaName: ordering
+            tableName: order_statuses
+            columnNames: type
+            constraintName: uk_order_statuses_type
+
+        - createIndex:
+            schemaName: ordering
+            tableName: order_statuses
+            indexName: idx_order_statuses_name
+            columns:
+              - column:
+                  name: name
+
+        - createIndex:
+            schemaName: ordering
+            tableName: order_statuses
+            indexName: idx_order_statuses_type
+            columns:
+              - column:
+                  name: type
+
+        - createIndex:
+            schemaName: ordering
+            tableName: order_statuses
+            indexName: idx_order_statuses_active
+            columns:
+              - column:
+                  name: active

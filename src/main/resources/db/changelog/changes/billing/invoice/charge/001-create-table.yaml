@@ -1,0 +1,79 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1784287806970-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: billing
+            tableName: invoice_charges
+            remarks: Stores charge snapshots associated with an invoice.
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: invoice_id
+                  type: ${id.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: type
+                  type: ${name.type}
+                  remarks: Invoice charge type enum.
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: amount
+                  type: ${price.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: description
+                  type: ${description.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+        - addPrimaryKey:
+            schemaName: billing
+            tableName: invoice_charges
+            columnNames: id
+            constraintName: pk_invoice_charges
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: billing
+            baseTableName: invoice_charges
+            baseColumnNames: invoice_id
+            referencedTableSchemaName: billing
+            referencedTableName: invoices
+            referencedColumnNames: id
+            constraintName: fk_invoice_charges_invoice
+
+        - createIndex:
+            schemaName: billing
+            tableName: invoice_charges
+            indexName: idx_invoice_charges_invoice
+            columns:
+              - column:
+                  name: invoice_id
+
+        - createIndex:
+            schemaName: billing
+            tableName: invoice_charges
+            indexName: idx_invoice_charges_type
+            columns:
+              - column:
+                  name: type

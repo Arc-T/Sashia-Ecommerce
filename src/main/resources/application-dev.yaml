@@ -1,0 +1,105 @@
+spring:
+
+  application:
+    name: ASA
+
+  config:
+    import: classpath:db/secrets.yaml, classpath:sms/melipayamak.yml
+
+  main:
+    lazy-initialization: true
+
+  threads:
+    virtual:
+      enabled: true
+
+  mvc:
+    static-path-pattern: /media/**
+    log-resolved-exception: false
+    problemdetails:
+      enabled: true
+
+  web:
+    locale: fa_IR
+    locale-resolver: accept_header
+    resources:
+      static-locations: file:uploads/
+    error:
+      whitelabel:
+        enabled: true
+
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 20MB
+      max-request-size: 30MB
+
+  jackson:
+    default-property-inclusion: non_null
+
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/master.yaml
+    database-change-log-table: liquibase_changelogs
+    database-change-log-lock-table: liquibase_changelog_locks
+
+  datasource:
+    name: ${DB.NAME}
+    url: ${DB.URL}
+    driver-class-name: ${DB.DRIVER}
+    username: ${DB.USERNAME}
+    password: ${DB.PASSWORD}
+    type: org.springframework.jdbc.datasource.DriverManagerDataSource
+    connection-fetch: lazy
+
+  jpa:
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        generate_statistics: true
+        order_updates: true
+        order_inserts: true
+        connection:
+          autocommit: false
+        jdbc:
+          batch_size: 50
+
+    hibernate:
+      ddl-auto: none
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          authority-prefix: ''
+
+  cache:
+    caffeine:
+      spec: maximumSize=500,expireAfterAccess=600s
+
+server:
+  address: 0.0.0.0
+  port: 8080
+  #  tomcat:
+
+logging:
+  level:
+    com.sashia.ecommerce: debug
+    org.hibernate: debug
+    org.springframework.security: trace
+    com.zaxxer.hikari.HikariConfig: debug
+  charset:
+    console: UTF-8
+
+#################################### VARIABLES #################################
+
+sms:
+  url: ${MELIPAYAMAK.URL}
+  from: ${MELIPAYAMAK.FROM}
+  password: ${MELIPAYAMAK.PASSWORD}
+  username: ${MELIPAYAMAK.USERNAME}

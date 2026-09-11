@@ -1,0 +1,137 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1785176152711-1
+      author: Mr.Arc-T
+      changes:
+        - insert:
+            schemaName: notification
+            tableName: sms_statuses
+            columns:
+              - column: { name: code, value: '0' }
+              - column: { name: status, value: 'نام کاربری یا رمز عبور اشتباه می باشد.' }
+
+        - insert:
+            schemaName: notification
+            tableName: sms_statuses
+            columns:
+              - column: { name: code, value: '1' }
+              - column: { name: status, value: 'ارسال موفقیت آمیز.' }
+
+        - insert:
+            schemaName: notification
+            tableName: sms_statuses
+            columns:
+              - column: { name: code, value: '2' }
+              - column: { name: status, value: 'اعتبار کافی نمی باشد.' }
+
+        - insert:
+            schemaName: notification
+            tableName: sms_statuses
+            columns:
+              - column: { name: code, value: '3' }
+              - column: { name: status, value: 'محدودیت در ارسال روزانه' }
+
+        - insert:
+            schemaName: notification
+            tableName: sms_statuses
+            columns:
+              - column: { name: code, value: '4' }
+              - column: { name: status, value: 'محدودیت در حجم ارسال' }
+
+        - insert:
+            schemaName: notification
+            tableName: sms_statuses
+            columns:
+              - column: { name: code, value: '5' }
+              - column: { name: status, value: 'شماره فرستنده معتبر نمی باشد.' }
+
+        - insert:
+            schemaName: notification
+            tableName: sms_statuses
+            columns:
+              - column: { name: code, value: '6' }
+              - column: { name: status, value: 'سامانه در حال بروزرسانی می باشد.' }
+
+        - insert:
+            schemaName: notification
+            tableName: sms_statuses
+            columns:
+              - column: { name: code, value: '7' }
+              - column: { name: status, value: 'متن حاوی کلمه فیلتر شده می باشد.' }
+
+        - insert:
+            schemaName: notification
+            tableName: sms_statuses
+            columns:
+              - column: { name: code, value: '9' }
+              - column: { name: status, value: 'ارسال از خطوط عمومی از طریق وب سرویس امکان پذیر نمی باشد.' }
+
+        - insert:
+            schemaName: notification
+            tableName: sms_statuses
+            columns:
+              - column: { name: code, value: '10' }
+              - column: { name: status, value: 'کاربر مورد نظر فعال نمی باشد.' }
+
+        - insert:
+            schemaName: notification
+            tableName: sms_statuses
+            columns:
+              - column: { name: code, value: '11' }
+              - column: { name: status, value: 'ارسال نشده' }
+
+        - insert:
+            schemaName: notification
+            tableName: sms_statuses
+            columns:
+              - column: { name: code, value: '12' }
+              - column: { name: status, value: 'مدارک کاربر کامل نمی باشد.' }
+
+        - insert:
+            schemaName: notification
+            tableName: sms_statuses
+            columns:
+              - column: { name: code, value: '14' }
+              - column: { name: status, value: 'متن حاوی لینک می باشد.' }
+
+        - insert:
+            schemaName: notification
+            tableName: sms_statuses
+            columns:
+              - column: { name: code, value: '15' }
+              - column: { name: status, value: 'ارسال به بیش از 1 شماره همراه بدون درج "لغو11" ممکن نیست.' }
+
+        - insert:
+            schemaName: notification
+            tableName: sms_statuses
+            columns:
+              - column: { name: code, value: '16' }
+              - column: { name: status, value: 'شماره گیرنده ای یافت نشد' }
+
+        - insert:
+            schemaName: notification
+            tableName: sms_statuses
+            columns:
+              - column: { name: code, value: '17' }
+              - column: { name: status, value: 'متن پیامک خالی می باشد' }
+
+        - insert:
+            schemaName: notification
+            tableName: sms_statuses
+            columns:
+              - column: { name: code, value: '18' }
+              - column: { name: status, value: 'در صف ارسال می باشد.' }
+
+        - insert:
+            schemaName: notification
+            tableName: sms_statuses
+            columns:
+              - column: { name: code, value: '19' }
+              - column: { name: status, value: 'خطای منطقی رخ داده است.' }
+
+        - insert:
+            schemaName: notification
+            tableName: sms_statuses
+            columns:
+              - column: { name: code, value: '35' }
+              - column: { name: status, value: 'در REST به معنای وجود شماره در لیست سیاه مخابرات می‌باشد' }

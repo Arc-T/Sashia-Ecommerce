@@ -1,0 +1,115 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1767965277357-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: notification
+            tableName: sms
+            remarks: Stores sent SMS messages
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: phone
+                  type: ${phone.type}
+                  remarks: Persian phone number
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: status_id
+                  type: ${integer_value.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: template_id
+                  type: ${integer_value.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: text
+                  type: ${long_text.type}
+                  remarks: Supports Persian text
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: response
+                  type: ${short_text.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: description
+                  type: VARCHAR(500)
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: updated_at
+                  type: ${timestamp_value.type}
+                  constraints:
+                    nullable: true
+
+        - addPrimaryKey:
+            schemaName: notification
+            tableName: sms
+            columnNames: id
+            constraintName: pk_sms
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: notification
+            baseTableName: sms
+            baseColumnNames: status_id
+            referencedTableSchemaName: notification
+            referencedTableName: sms_statuses
+            referencedColumnNames: id
+            constraintName: fk_sms_status
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: notification
+            baseTableName: sms
+            baseColumnNames: template_id
+            referencedTableSchemaName: notification
+            referencedTableName: sms_templates
+            referencedColumnNames: id
+            constraintName: fk_sms_template
+
+        - createIndex:
+            schemaName: notification
+            tableName: sms
+            indexName: idx_sms_phone
+            columns:
+              - column:
+                  name: phone
+
+        - createIndex:
+            schemaName: notification
+            tableName: sms
+            indexName: idx_sms_status
+            columns:
+              - column:
+                  name: status_id
+
+        - createIndex:
+            schemaName: notification
+            tableName: sms
+            indexName: idx_sms_template
+            columns:
+              - column:
+                  name: template_id

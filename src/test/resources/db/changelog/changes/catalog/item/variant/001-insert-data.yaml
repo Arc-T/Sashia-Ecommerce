@@ -1,0 +1,74 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1785175912470-1
+      author: Mr.Arc-T
+      changes:
+        - insert:
+            schemaName: catalog
+            tableName: item_variants
+            columns:
+              - column: { name: item_id, valueNumeric: '1' }
+              - column: { name: currency, value: 'IRR'}
+              - column: { name: unit_price, valueNumeric: '12000'}
+              - column: { name: stock, valueNumeric: '3' }
+              - column: { name: status, value: 'MARKETABLE' }
+
+        - insert:
+            schemaName: catalog
+            tableName: item_variants
+            columns:
+              - column: { name: item_id, valueNumeric: '1' }
+              - column: { name: currency, value: 'IRR'}
+              - column: { name: unit_price, valueNumeric: '80000'}
+              - column: { name: stock, valueNumeric: '2' }
+              - column: { name: status, value: 'MARKETABLE' }
+
+        - insert:
+            schemaName: catalog
+            tableName: item_variants
+            columns:
+              - column: { name: item_id, valueNumeric: '2' }
+              - column: { name: currency, value: 'IRR'}
+              - column: { name: unit_price, valueNumeric: '65000'}
+              - column: { name: stock, valueNumeric: '1' }
+              - column: { name: status, value: 'MARKETABLE' }
+
+        - insert:
+            schemaName: catalog
+            tableName: item_variants
+            columns:
+              - column: { name: item_id, valueNumeric: '3' }
+              - column: { name: currency, value: 'IRR'}
+              - column: { name: unit_price, valueNumeric: '21000'}
+              - column: { name: stock, valueNumeric: '1' }
+              - column: { name: status, value: 'MARKETABLE' }
+
+        - insert:
+            schemaName: catalog
+            tableName: item_variants
+            columns:
+              - column: { name: item_id, valueNumeric: '4' }
+              - column: { name: currency, value: 'IRR'}
+              - column: { name: unit_price, valueNumeric: '10000'}
+              - column: { name: stock, valueNumeric: '5' }
+              - column: { name: status, value: 'MARKETABLE' }
+
+        - insert:
+            schemaName: catalog
+            tableName: item_variants
+            columns:
+              - column: { name: item_id, valueNumeric: '5' }
+              - column: { name: currency, value: 'IRR'}
+              - column: { name: unit_price, valueNumeric: '74000'}
+              - column: { name: stock, valueNumeric: '2' }
+              - column: { name: status, value: 'MARKETABLE' }
+
+        - insert:
+            schemaName: catalog
+            tableName: item_variants
+            columns:
+              - column: { name: item_id, valueNumeric: '6' }
+              - column: { name: currency, value: 'IRR'}
+              - column: { name: unit_price, valueNumeric: '15800'}
+              - column: { name: stock, valueNumeric: '1' }
+              - column: { name: status, value: 'MARKETABLE' }

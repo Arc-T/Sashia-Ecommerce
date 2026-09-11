@@ -1,0 +1,43 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1785176004455-1
+      author: Mr.Arc-T
+      changes:
+        - insert:
+            schemaName: identity
+            tableName: addresses
+            columns:
+              - column: { name: user_id, valueNumeric: '1' }
+              - column: { name: address_type, value: 'HOME' }
+              - column: { name: province_id, valueNumeric: '1' }
+              - column: { name: address_line, value: '123 Elm St, City A' }
+              - column: { name: postal_code, value: '12343214' }
+              - column: { name: latitude, valueNumeric: '35.6895' }
+              - column: { name: longitude, valueNumeric: '32.2343' }
+              - column: { name: description, value: 'Primary residence' }
+
+        - insert:
+            schemaName: identity
+            tableName: addresses
+            columns:
+              - column: { name: user_id, valueNumeric: '1' }
+              - column: { name: address_type, value: 'WORK' }
+              - column: { name: province_id, valueNumeric: '15' }
+              - column: { name: address_line, value: '456 Oak Ave, City B' }
+              - column: { name: postal_code, value: '2342342' }
+              - column: { name: latitude, valueNumeric: '24.24234' }
+              - column: { name: longitude, valueNumeric: '34.19890' }
+              - column: { name: description, value: 'Office location' }
+
+        - insert:
+            schemaName: identity
+            tableName: addresses
+            columns:
+              - column: { name: user_id, valueNumeric: '1' }
+              - column: { name: address_type, value: 'OTHER' }
+              - column: { name: province_id, valueNumeric: '30' }
+              - column: { name: address_line, value: '789 Pine Rd, City C' }
+              - column: { name: postal_code, value: '242342442' }
+              - column: { name: latitude, valueNumeric: '89.2424' }
+              - column: { name: longitude, valueNumeric: '34.23424' }
+              - column: { name: description, value: 'Vacation home' }

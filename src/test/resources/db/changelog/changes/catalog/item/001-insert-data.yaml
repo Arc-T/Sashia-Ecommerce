@@ -1,0 +1,60 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1785175912470-1
+      author: Mr.Arc-T
+      changes:
+        - insert:
+            schemaName: catalog
+            tableName: items
+            columns:
+              - column: { name: category_id, valueNumeric: '1' }
+              - column: { name: item_type, value: 'PRODUCT'}
+              - column: { name: title, value: 'Apple iPhone 16 Pro' }
+              - column: { name: is_featured, valueBoolean: 'true' }
+
+        - insert:
+            schemaName: catalog
+            tableName: items
+            columns:
+              - column: { name: category_id, valueNumeric: '1' }
+              - column: { name: item_type, value: 'PRODUCT'}
+              - column: { name: title, value: 'Samsung Galaxy S25 Ultra' }
+              - column: { name: is_featured, valueBoolean: 'true' }
+
+        - insert:
+            schemaName: catalog
+            tableName: items
+            columns:
+              - column: { name: category_id, valueNumeric: '2' }
+              - column: { name: item_type, value: 'PRODUCT'}
+              - column: { name: title, value: 'Logitech MX Master 3S' }
+              - column: { name: is_featured, valueBoolean: 'false' }
+
+        - insert:
+            schemaName: catalog
+            tableName: items
+            columns:
+              - column: { name: category_id, valueNumeric: '2' }
+              - column: { name: item_type, value: 'PRODUCT'}
+              - column: { name: title, value: 'Dell UltraSharp U2723QE' }
+              - column: { name: is_featured, valueBoolean: 'false' }
+
+        - insert:
+            schemaName: catalog
+            tableName: items
+            columns:
+              - column: { name: category_id, valueNumeric: '1' }
+              - column: { name: item_type, value: 'PRODUCT'}
+              - column: { name: item_type, value: 'SERVICE_OFFERING' }
+              - column: { name: title, value: 'Website Performance Audit' }
+              - column: { name: is_featured, valueBoolean: 'false' }
+
+        - insert:
+            schemaName: catalog
+            tableName: items
+            columns:
+              - column: { name: category_id, valueNumeric: '2' }
+              - column: { name: item_type, value: 'PRODUCT'}
+              - column: { name: item_type, value: 'SERVICE_OFFERING' }
+              - column: { name: title, value: 'Spring Boot Architecture Review' }
+              - column: { name: is_featured, valueBoolean: 'true' }

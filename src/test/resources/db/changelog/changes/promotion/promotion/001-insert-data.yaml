@@ -1,0 +1,48 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1785083615582-1
+      author: Mr.Arc-T
+      changes:
+        - insert:
+            schemaName: promotion
+            tableName: promotions
+            columns:
+              - column:
+                  name: scope_id
+                  valueNumeric: '1'
+
+              - column:
+                  name: type_id
+                  valueNumeric: '1'
+
+              - column:
+                  name: target_type_id
+                  valueNumeric: '1'
+
+              - column:
+                  name: name
+                  value: 20% OFF Selected Item
+
+              - column:
+                  name: description
+                  value: Applies a 20 percent discount to a specific catalog item.
+
+              - column:
+                  name: priority
+                  valueNumeric: '100'
+
+              - column:
+                  name: is_active
+                  valueBoolean: 'true'
+
+              - column:
+                  name: is_stackable
+                  valueBoolean: 'false'
+
+              - column:
+                  name: valid_from
+                  valueDate: 2026-01-01T00:00:00
+
+              - column:
+                  name: valid_until
+                  valueDate: 2029-01-01T00:00:00

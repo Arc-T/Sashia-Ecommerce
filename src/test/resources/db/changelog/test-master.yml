@@ -1,0 +1,24 @@
+databaseChangeLog:
+  ######################################## TYPE ##########################################
+  - include:
+      file: db/changelog/h2-type.yml
+  ######################################## MASTER ########################################
+  - include:
+      file: db/changelog/master.yaml
+  ######################################## DATA ##########################################
+  - include:
+      file: db/changelog/changes/promotion/promotion/001-insert-data.yaml
+  - include:
+      file: db/changelog/changes/promotion/discount/001-insert-data.yaml
+  - include:
+      file: db/changelog/changes/promotion/condition/001-insert-data.yaml
+  - include:
+      file: db/changelog/changes/catalog/category/001-insert-data.yaml
+  - include:
+      file: db/changelog/changes/catalog/item/001-insert-data.yaml
+  - include:
+      file: db/changelog/changes/catalog/item/variant/001-insert-data.yaml
+  - include:
+      file: db/changelog/changes/identity/vip/group/001-insert-data.yaml
+  - include:
+      file: db/changelog/changes/identity/vip/membership/001-insert-data.yaml

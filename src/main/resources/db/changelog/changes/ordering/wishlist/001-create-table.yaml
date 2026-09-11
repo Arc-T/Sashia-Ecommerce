@@ -1,0 +1,86 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1767965234471-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: ordering
+            tableName: wishlists
+            remarks: Stores user wishlist
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: user_id
+                  type: ${integer_value.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: product_id
+                  type: ${integer_value.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+        - addPrimaryKey:
+            schemaName: ordering
+            tableName: wishlists
+            columnNames: id
+            constraintName: pk_wishlists
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: ordering
+            baseTableName: wishlists
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedTableSchemaName: identity
+            referencedColumnNames: id
+            constraintName: fk_wishlist_user
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: ordering
+            baseTableName: wishlists
+            baseColumnNames: product_id
+            referencedTableSchemaName: catalog
+            referencedTableName: products
+            referencedColumnNames: id
+            constraintName: fk_wishlist_product
+
+        - createIndex:
+            schemaName: ordering
+            tableName: wishlists
+            indexName: idx_wishlist_user
+            columns:
+              - column:
+                  name: user_id
+
+        - createIndex:
+            schemaName: ordering
+            tableName: wishlists
+            indexName: idx_wishlist_product
+            columns:
+              - column:
+                  name: product_id
+
+        - createIndex:
+            unique: true
+            schemaName: ordering
+            tableName: wishlists
+            indexName: idx_wishlist_unique
+            columns:
+              - column:
+                  name: user_id
+              - column:
+                  name: product_id

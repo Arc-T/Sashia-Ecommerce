@@ -1,0 +1,190 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1785176599090-1
+      author: Mr.Arc-T
+      changes:
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'البرز' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'اردبیل' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'بوشهر' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'چهارمحال و بختیاری' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'آذربایجان شرقی' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'اصفهان' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'فارس' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'گیلان' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'گلستان' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'همدان' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'هرمزگان' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'ایلام' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'کرمان' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'کرمانشاه' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'خوزستان' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'کهگیلویه و بویراحمد' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'کردستان' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'لرستان' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'مرکزی' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'مازندران' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'خراسان شمالی' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'قزوین' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'قم' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'خراسان رضوی' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'سمنان' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'سیستان و بلوچستان' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'خراسان جنوبی' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'تهران' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'آذربایجان غربی' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'یزد' }
+
+        - insert:
+            schemaName: identity
+            tableName: provinces
+            columns:
+              - column: { name: name, value: 'زنجان' }

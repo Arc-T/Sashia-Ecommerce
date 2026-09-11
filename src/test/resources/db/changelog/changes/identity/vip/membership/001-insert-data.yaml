@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1786650445248-1
+      author: Mr.Arc-T
+      changes:
+        - insert:
+            schemaName: identity
+            tableName: vip_memberships
+            columns:
+              - column: { name: vip_group_id, valueNumeric: '1' }
+              - column: { name: user_id, valueNumeric: '1' }

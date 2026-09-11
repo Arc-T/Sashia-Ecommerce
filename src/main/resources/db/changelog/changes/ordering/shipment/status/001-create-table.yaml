@@ -1,0 +1,97 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1784294429635-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: ordering
+            tableName: shipment_statuses
+            remarks: Stores available shipment statuses.
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: name
+                  type: ${name.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: type
+                  type: ${name.type}
+                  remarks: Shipment status type enum.
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: description
+                  type: ${description.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: active
+                  type: ${boolean.type}
+                  defaultValueBoolean: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: updated_at
+                  type: ${timestamp_value.type}
+                  constraints:
+                    nullable: true
+
+        - addPrimaryKey:
+            schemaName: ordering
+            tableName: shipment_statuses
+            columnNames: id
+            constraintName: pk_shipment_statuses
+
+        - addUniqueConstraint:
+            schemaName: ordering
+            tableName: shipment_statuses
+            columnNames: name
+            constraintName: uk_shipment_statuses_name
+
+        - addUniqueConstraint:
+            schemaName: ordering
+            tableName: shipment_statuses
+            columnNames: type
+            constraintName: uk_shipment_statuses_type
+
+        - createIndex:
+            schemaName: ordering
+            tableName: shipment_statuses
+            indexName: idx_shipment_statuses_name
+            columns:
+              - column:
+                  name: name
+
+        - createIndex:
+            schemaName: ordering
+            tableName: shipment_statuses
+            indexName: idx_shipment_statuses_type
+            columns:
+              - column:
+                  name: type
+
+        - createIndex:
+            schemaName: ordering
+            tableName: shipment_statuses
+            indexName: idx_shipment_statuses_active
+            columns:
+              - column:
+                  name: active

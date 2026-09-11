@@ -1,0 +1,144 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1767965051458-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: identity
+            tableName: users
+            remarks: Stores user information
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: first_name
+                  type: ${name.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: last_name
+                  type: ${name.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: email
+                  type: ${short_text.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: phone
+                  type: ${phone.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: password
+                  type: ${short_text.type}
+                  remarks: Hashed password (e.g., bcrypt)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: user_group_id
+                  type: ${integer_value.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: gender
+                  # type: ENUM('MALE', 'FEMALE')
+                  type: VARCHAR(500)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: description
+                  type: VARCHAR(500)
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: updated_at
+                  type: ${timestamp_value.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: deleted_at
+                  type: ${timestamp_value.type}
+                  constraints:
+                    nullable: true
+
+        - addPrimaryKey:
+            schemaName: identity
+            tableName: users
+            columnNames: id
+            constraintName: pk_users
+
+        - addUniqueConstraint:
+            schemaName: identity
+            tableName: users
+            columnNames: email
+            constraintName: uk_users_email
+
+        - addUniqueConstraint:
+            schemaName: identity
+            tableName: users
+            columnNames: phone
+            constraintName: uk_users_phone
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: identity
+            baseTableName: users
+            baseColumnNames: user_group_id
+            referencedTableSchemaName: identity
+            referencedTableName: user_groups
+            referencedColumnNames: id
+            constraintName: fk_users_user_group
+
+        - createIndex:
+            schemaName: identity
+            tableName: users
+            indexName: idx_users_email
+            columns:
+              - column:
+                  name: email
+
+        - createIndex:
+            schemaName: identity
+            tableName: users
+            indexName: idx_users_phone
+            columns:
+              - column:
+                  name: phone
+
+        - createIndex:
+            schemaName: identity
+            tableName: users
+            indexName: idx_users_group
+            columns:
+              - column:
+                  name: user_group_id
+
+        - createIndex:
+            schemaName: identity
+            tableName: users
+            indexName: idx_users_deleted_at
+            columns:
+              - column:
+                  name: deleted_at

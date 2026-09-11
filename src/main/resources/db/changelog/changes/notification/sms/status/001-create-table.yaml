@@ -1,0 +1,59 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1767965272867-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: notification
+            tableName: sms_statuses
+            remarks: Stores SMS status codes
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: code
+                  type: ${name.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: status
+                  type: ${short_text.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: description
+                  type: ${short_text.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: updated_at
+                  type: ${timestamp_value.type}
+                  constraints:
+                    nullable: true
+
+        - addPrimaryKey:
+            schemaName: notification
+            tableName: sms_statuses
+            columnNames: id
+            constraintName: pk_sms_statuses
+
+        - addUniqueConstraint:
+            schemaName: notification
+            tableName: sms_statuses
+            columnNames: code
+            constraintName: uk_sms_statuses_code

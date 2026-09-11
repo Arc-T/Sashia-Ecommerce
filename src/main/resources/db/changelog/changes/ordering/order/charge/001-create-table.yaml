@@ -1,0 +1,91 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1784286890315-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: ordering
+            tableName: order_charges
+            remarks: Stores additional charges applied to an order, such as gift wrapping, installation, insurance, or custom service fees.
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: order_id
+                  type: ${id.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: name
+                  type: ${name.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: type
+                  type: ${name.type}
+                  remarks: Charge type enum.
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: amount
+                  type: ${price.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: description
+                  type: ${description.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: updated_at
+                  type: ${timestamp_value.type}
+                  constraints:
+                    nullable: true
+
+        - addPrimaryKey:
+            schemaName: ordering
+            tableName: order_charges
+            columnNames: id
+            constraintName: pk_order_charges
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: ordering
+            baseTableName: order_charges
+            baseColumnNames: order_id
+            referencedTableSchemaName: ordering
+            referencedTableName: orders
+            referencedColumnNames: id
+            constraintName: fk_order_charges_order
+
+        - createIndex:
+            schemaName: ordering
+            tableName: order_charges
+            indexName: idx_order_charges_order
+            columns:
+              - column:
+                  name: order_id
+
+        - createIndex:
+            schemaName: ordering
+            tableName: order_charges
+            indexName: idx_order_charges_type
+            columns:
+              - column:
+                  name: type

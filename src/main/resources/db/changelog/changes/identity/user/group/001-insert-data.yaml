@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1785176831186-1
+      author: Mr.Arc-T
+      changes:
+        - insert:
+            schemaName: identity
+            tableName: user_groups
+            columns:
+              - column: { name: name, value: 'Admin' }
+              - column: { name: description, value: 'Administrators with full access to the system.' }
+
+        - insert:
+            schemaName: identity
+            tableName: user_groups
+            columns:
+              - column: { name: name, value: 'Customer' }
+              - column: { name: description, value: 'Normal customers with minimal access.' }

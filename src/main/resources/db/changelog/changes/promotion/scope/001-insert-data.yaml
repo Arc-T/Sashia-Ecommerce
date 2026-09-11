@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1785177096863-1
+      author: Mr.Arc-T
+      changes:
+        - insert:
+            schemaName: promotion
+            tableName: scopes
+            columns:
+              - column: { name: title, value: 'Item' }
+              - column: { name: code, value: 'PRODUCT' }
+              - column: { name: description, value: 'Specifies the promotion should be evaluated on items.' }

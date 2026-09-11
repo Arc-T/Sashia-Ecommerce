@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1784212766370-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: catalog
+            tableName: service_offerings
+            remarks: Stores service-specific information for catalog items.
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: name
+                  type: ${name.type}
+                  remarks: Supports Persian names.
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: description
+                  type: ${short_text.type}
+                  constraints:
+                    nullable: true
+
+        - addPrimaryKey:
+            schemaName: catalog
+            tableName: service_offerings
+            columnNames: id
+            constraintName: pk_service_offerings
+
+        - addUniqueConstraint:
+            schemaName: catalog
+            tableName: service_offerings
+            columnNames: name
+            constraintName: uk_service_offerings_name

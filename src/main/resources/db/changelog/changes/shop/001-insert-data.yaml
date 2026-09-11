@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1785177219118-1
+      author: Mr.Arc-T
+      changes:
+        - insert:
+            schemaName: shop
+            tableName: shops
+            columns:
+              - column: { name: name, value: 'دستسازه های سنگی آترا' }
+              - column: { name: phone, value: '361629708' }
+              - column: { name: address_id, valueNumeric: '1' }
+              - column: { name: status, value: 'PENDING' }
+              - column: { name: description, value: 'A family-owned bakery specializing in artisan breads and pastries since 1995. We use only the finest organic ingredients.' }

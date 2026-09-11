@@ -1,0 +1,89 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1784293789196-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: ordering
+            tableName: order_transactions
+            remarks: Stores the history of status transitions for orders.
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: order_id
+                  type: ${id.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: order_status_id
+                  type: ${id.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: description
+                  type: ${description.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+        - addPrimaryKey:
+            schemaName: ordering
+            tableName: order_transactions
+            columnNames: id
+            constraintName: pk_order_transactions
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: ordering
+            baseTableName: order_transactions
+            baseColumnNames: order_id
+            referencedTableSchemaName: ordering
+            referencedTableName: orders
+            referencedColumnNames: id
+            constraintName: fk_order_transactions_order
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: ordering
+            baseTableName: order_transactions
+            baseColumnNames: order_status_id
+            referencedTableSchemaName: ordering
+            referencedTableName: order_statuses
+            referencedColumnNames: id
+            constraintName: fk_order_transactions_status
+
+        - createIndex:
+            schemaName: ordering
+            tableName: order_transactions
+            indexName: idx_order_transactions_order
+            columns:
+              - column:
+                  name: order_id
+
+        - createIndex:
+            schemaName: ordering
+            tableName: order_transactions
+            indexName: idx_order_transactions_status
+            columns:
+              - column:
+                  name: order_status_id
+
+        - createIndex:
+            schemaName: ordering
+            tableName: order_transactions
+            indexName: idx_order_transactions_created_at
+            columns:
+              - column:
+                  name: created_at

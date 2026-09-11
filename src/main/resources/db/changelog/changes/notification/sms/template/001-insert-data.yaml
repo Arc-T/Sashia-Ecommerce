@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1785176212848-1
+      author: Mr.Arc-T
+      changes:
+        - insert:
+            schemaName: notification
+            tableName: sms_templates
+            columns:
+              - column: { name: name, value: 'OTP' }
+              - column: { name: message, value: 'کد ورود شما: {0} \n\n دستسازه‌های سنگی آترا' }

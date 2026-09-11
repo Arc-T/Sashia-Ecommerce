@@ -1,0 +1,130 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1784147258828-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: billing
+            tableName: invoice_items
+            remarks: Stores item snapshots included in an invoice.
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: invoice_id
+                  type: ${id.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: item_type
+                  type: ${name.type}
+                  remarks: Item type enum.
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: item_name
+                  type: ${name.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: item_variant_name
+                  type: ${name.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: quantity
+                  type: ${integer_value.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: unit_price
+                  type: ${price.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: subtotal
+                  type: ${price.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: tax_rate
+                  type: ${price.type}
+                  defaultValueNumeric: '0'
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: tax_amount
+                  type: ${price.type}
+                  defaultValueNumeric: '0'
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: discount_amount
+                  type: ${price.type}
+                  defaultValueNumeric: '0'
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: total
+                  type: ${price.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: description
+                  type: ${description.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+        - addPrimaryKey:
+            schemaName: billing
+            tableName: invoice_items
+            columnNames: id
+            constraintName: pk_invoice_items
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: billing
+            baseTableName: invoice_items
+            baseColumnNames: invoice_id
+            referencedTableSchemaName: billing
+            referencedTableName: invoices
+            referencedColumnNames: id
+            constraintName: fk_invoice_items_invoice
+
+        - createIndex:
+            schemaName: billing
+            tableName: invoice_items
+            indexName: idx_invoice_items_invoice
+            columns:
+              - column:
+                  name: invoice_id
+
+        - createIndex:
+            schemaName: billing
+            tableName: invoice_items
+            indexName: idx_invoice_items_item_type
+            columns:
+              - column:
+                  name: item_type

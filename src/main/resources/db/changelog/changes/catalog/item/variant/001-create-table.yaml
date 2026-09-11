@@ -1,0 +1,99 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1783792605596-4
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: catalog
+            tableName: item_variants
+            remarks: Stores purchasable variants of catalog items
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: stock
+                  type: ${integer_value.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: item_id
+                  type: ${id.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: status
+                  type: ${name.type}
+                  remarks: Item variant status enum
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: currency
+                  type: ${name.type}
+                  remarks: Stores currency code for price
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: unit_price
+                  type: ${price.type}
+                  remarks: Unit price of item variant
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: updated_at
+                  type: ${timestamp_value.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: deleted_at
+                  type: ${timestamp_value.type}
+                  constraints:
+                    nullable: true
+
+        - addPrimaryKey:
+            schemaName: catalog
+            tableName: item_variants
+            columnNames: id
+            constraintName: pk_item_variants
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: catalog
+            baseTableName: item_variants
+            baseColumnNames: item_id
+            referencedTableSchemaName: catalog
+            referencedTableName: items
+            referencedColumnNames: id
+            constraintName: fk_item_variants_item
+
+        - createIndex:
+            schemaName: catalog
+            tableName: item_variants
+            indexName: idx_item_variants_item
+            columns:
+              - column:
+                  name: item_id
+
+        - createIndex:
+            schemaName: catalog
+            tableName: item_variants
+            indexName: idx_item_variants_status
+            columns:
+              - column:
+                  name: status

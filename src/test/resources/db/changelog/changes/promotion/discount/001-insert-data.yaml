@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1785178389654-1
+      author: Mr.Arc-T
+      changes:
+        - insert:
+            schemaName: promotion
+            tableName: discounts
+            columns:
+              - column: { name: promotion_id, valueNumeric: '1' }
+              - column: { name: type_id, valueNumeric: '1' }
+              - column: { name: amount, valueNumeric: '20.00' }

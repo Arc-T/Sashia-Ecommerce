@@ -1,0 +1,157 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1768464154527-1
+      author: Mr.Arc-T
+      changes:
+        - insert:
+            schemaName: catalog
+            tableName: attributes
+            columns:
+              - column:
+                  name: name
+                  value: 'جنس سنگ'
+              - column:
+                  name: category_id
+                  valueNumeric: '2'
+              - column:
+                  name: type
+                  value: 'TEXT'
+              - column:
+                  name: is_filterable
+                  valueBoolean: 'false'
+
+        - insert:
+            schemaName: catalog
+            tableName: attributes
+            columns:
+              - column:
+                  name: name
+                  value: 'جنس بند'
+              - column:
+                  name: category_id
+                  valueNumeric: '2'
+              - column:
+                  name: type
+                  value: 'TEXT'
+              - column:
+                  name: is_filterable
+                  valueBoolean: 'false'
+
+        - insert:
+            schemaName: catalog
+            tableName: attributes
+            columns:
+              - column:
+                  name: name
+                  value: 'رنگ'
+              - column:
+                  name: category_id
+                  valueNumeric: '2'
+              - column:
+                  name: type
+                  value: 'TEXT'
+              - column:
+                  name: is_filterable
+                  valueBoolean: 'true'
+
+        - insert:
+            schemaName: catalog
+            tableName: attributes
+            columns:
+              - column:
+                  name: name
+                  value: 'اندازه'
+              - column:
+                  name: category_id
+                  valueNumeric: '2'
+              - column:
+                  name: type
+                  value: 'TEXT'
+              - column:
+                  name: is_filterable
+                  valueBoolean: 'true'
+
+        - insert:
+            schemaName: catalog
+            tableName: attributes
+            columns:
+              - column:
+                  name: name
+                  value: 'وزن'
+              - column:
+                  name: category_id
+                  valueNumeric: '2'
+              - column:
+                  name: type
+                  value: 'DECIMAL'
+              - column:
+                  name: is_filterable
+                  valueBoolean: 'true'
+
+        - insert:
+            schemaName: catalog
+            tableName: attributes
+            columns:
+              - column:
+                  name: name
+                  value: 'برند'
+              - column:
+                  name: category_id
+                  valueNumeric: '2'
+              - column:
+                  name: type
+                  value: 'TEXT'
+              - column:
+                  name: is_filterable
+                  valueBoolean: 'true'
+
+        - insert:
+            schemaName: catalog
+            tableName: attributes
+            columns:
+              - column:
+                  name: name
+                  value: 'مواد اولیه'
+              - column:
+                  name: category_id
+                  valueNumeric: '2'
+              - column:
+                  name: type
+                  value: 'TEXT'
+              - column:
+                  name: is_filterable
+                  valueBoolean: 'false'
+
+        - insert:
+            schemaName: catalog
+            tableName: attributes
+            columns:
+              - column:
+                  name: name
+                  value: 'کشور سازنده'
+              - column:
+                  name: category_id
+                  valueNumeric: '2'
+              - column:
+                  name: type
+                  value: 'TEXT'
+              - column:
+                  name: is_filterable
+                  valueBoolean: 'true'
+
+        - insert:
+            schemaName: catalog
+            tableName: attributes
+            columns:
+              - column:
+                  name: name
+                  value: 'گارانتی'
+              - column:
+                  name: category_id
+                  valueNumeric: '2'
+              - column:
+                  name: type
+                  value: 'TEXT'
+              - column:
+                  name: is_filterable
+                  valueBoolean: 'false'

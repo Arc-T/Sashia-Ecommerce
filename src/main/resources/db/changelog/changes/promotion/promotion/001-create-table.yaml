@@ -1,0 +1,186 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1785083385772-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: promotion
+            tableName: promotions
+            remarks: Stores promotion definitions.
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: scope_id
+                  type: ${id.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: type_id
+                  type: ${id.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: target_type_id
+                  type: ${id.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: name
+                  type: ${name.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: description
+                  type: ${description.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: priority
+                  type: ${integer_value.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: is_active
+                  type: ${boolean.type}
+                  defaultValueBoolean: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: is_stackable
+                  type: ${boolean.type}
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: valid_from
+                  type: ${timestamp_value.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: valid_until
+                  type: ${timestamp_value.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: updated_at
+                  type: ${timestamp_value.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: deleted_at
+                  type: ${timestamp_value.type}
+                  constraints:
+                    nullable: true
+
+        - addPrimaryKey:
+            schemaName: promotion
+            tableName: promotions
+            columnNames: id
+            constraintName: pk_promotions
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: promotion
+            baseTableName: promotions
+            baseColumnNames: scope_id
+            referencedTableSchemaName: promotion
+            referencedTableName: scopes
+            referencedColumnNames: id
+            constraintName: fk_promotions_scope
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: promotion
+            baseTableName: promotions
+            baseColumnNames: type_id
+            referencedTableSchemaName: promotion
+            referencedTableName: types
+            referencedColumnNames: id
+            constraintName: fk_promotions_type
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: promotion
+            baseTableName: promotions
+            baseColumnNames: target_type_id
+            referencedTableSchemaName: promotion
+            referencedTableName: target_types
+            referencedColumnNames: id
+            constraintName: fk_promotions_target_type
+
+        - createIndex:
+            schemaName: promotion
+            tableName: promotions
+            indexName: idx_promotions_scope
+            columns:
+              - column:
+                  name: scope_id
+
+        - createIndex:
+            schemaName: promotion
+            tableName: promotions
+            indexName: idx_promotions_type
+            columns:
+              - column:
+                  name: type_id
+
+        - createIndex:
+            schemaName: promotion
+            tableName: promotions
+            indexName: idx_promotions_target_type
+            columns:
+              - column:
+                  name: target_type_id
+
+        - createIndex:
+            schemaName: promotion
+            tableName: promotions
+            indexName: idx_promotions_priority
+            columns:
+              - column:
+                  name: priority
+
+        - createIndex:
+            schemaName: promotion
+            tableName: promotions
+            indexName: idx_promotions_active
+            columns:
+              - column:
+                  name: is_active
+
+        - createIndex:
+            schemaName: promotion
+            tableName: promotions
+            indexName: idx_promotions_valid_from
+            columns:
+              - column:
+                  name: valid_from
+
+        - createIndex:
+            schemaName: promotion
+            tableName: promotions
+            indexName: idx_promotions_valid_until
+            columns:
+              - column:
+                  name: valid_until

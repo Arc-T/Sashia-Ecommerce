@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1768464284583-1
+      author: Mr.Arc-T
+      changes:
+        - insert:
+            schemaName: identity
+            tableName: user_group_roles
+            columns:
+              - column:
+                  name: role_id
+                  valueNumeric: '1'
+              - column:
+                  name: user_group_id
+                  valueNumeric: '1'

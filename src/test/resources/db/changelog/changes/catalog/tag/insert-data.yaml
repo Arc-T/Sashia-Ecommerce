@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1785178204402-1
+      author: Mr.Arc-T
+      changes:
+        - insert:
+            schemaName: catalog
+            tableName: tags
+            columns:
+              - column: { name: name, value: 'مردانه' }
+
+        - insert:
+            schemaName: catalog
+            tableName: tags
+            columns:
+              - column: { name: name, value: 'زنانه' }
+
+        - insert:
+            schemaName: catalog
+            tableName: tags
+            columns:
+              - column: { name: name, value: 'بچه گانه' }
+
+        - insert:
+            schemaName: catalog
+            tableName: tags
+            columns:
+              - column: { name: name, value: 'هدیه' }
+
+        - insert:
+            schemaName: catalog
+            tableName: tags
+            columns:
+              - column: { name: name, value: 'پرفروش' }
+
+        - insert:
+            schemaName: catalog
+            tableName: tags
+            columns:
+              - column: { name: name, value: 'لوکس' }

@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1785177175591-1
+      author: Mr.Arc-T
+      changes:
+        - insert:
+            schemaName: promotion
+            tableName: types
+            columns:
+              - column: { name: code, value: 'DISCOUNT' }
+              - column: { name: title, value: 'Discount' }
+              - column: { name: description, value: 'Applies a monetary discount to eligible items.' }
+
+        - insert:
+            schemaName: promotion
+            tableName: types
+            columns:
+              - column: { name: code, value: 'BUY_X_GET_Y' }
+              - column: { name: title, value: 'Buy X Get Y' }
+              - column: { name: description, value: 'Grants free or discounted items when purchase conditions are satisfied.' }
+
+        - insert:
+            schemaName: promotion
+            tableName: types
+            columns:
+              - column: { name: code, value: 'FREE_SHIPPING' }
+              - column: { name: title, value: 'Free Shipping' }
+              - column: { name: description, value: 'Removes or reduces the shipping cost.' }

@@ -1,0 +1,88 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1767965031398-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: identity
+            tableName: role_permissions
+            remarks: Maps roles to permissions
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: permission_id
+                  type: ${integer_value.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: role_id
+                  type: ${integer_value.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+        - addPrimaryKey:
+            schemaName: identity
+            tableName: role_permissions
+            columnNames: id
+            constraintName: pk_role_permissions
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: identity
+            baseTableName: role_permissions
+            baseColumnNames: permission_id
+            referencedTableSchemaName: identity
+            referencedTableName: permissions
+            referencedColumnNames: id
+            constraintName: fk_role_permission_permission
+            onDelete: CASCADE
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: identity
+            baseTableName: role_permissions
+            baseColumnNames: role_id
+            referencedTableSchemaName: identity
+            referencedTableName: roles
+            referencedColumnNames: id
+            constraintName: fk_role_permission_role
+            onDelete: CASCADE
+
+        - createIndex:
+            schemaName: identity
+            tableName: role_permissions
+            indexName: idx_role_permission_perm
+            columns:
+              - column:
+                  name: permission_id
+
+        - createIndex:
+            schemaName: identity
+            tableName: role_permissions
+            indexName: idx_role_permission_role
+            columns:
+              - column:
+                  name: role_id
+
+        - createIndex:
+            unique: true
+            schemaName: identity
+            tableName: role_permissions
+            indexName: idx_role_permission_unique
+            columns:
+              - column:
+                  name: role_id
+              - column:
+                  name: permission_id

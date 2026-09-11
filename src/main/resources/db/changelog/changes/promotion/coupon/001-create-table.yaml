@@ -1,0 +1,148 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1785136548349-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: promotion
+            tableName: coupons
+            remarks: Stores coupon codes for promotions.
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: promotion_id
+                  type: ${id.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: code
+                  type: ${name.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: usage_limit
+                  type: ${integer_value.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: usage_count
+                  type: ${integer_value.type}
+                  defaultValueNumeric: '0'
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: usage_limit_per_user
+                  type: ${integer_value.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: is_active
+                  type: ${boolean.type}
+                  defaultValueBoolean: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: valid_from
+                  type: ${timestamp_value.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: valid_until
+                  type: ${timestamp_value.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: updated_at
+                  type: ${timestamp_value.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: deleted_at
+                  type: ${timestamp_value.type}
+                  constraints:
+                    nullable: true
+
+        - addPrimaryKey:
+            schemaName: promotion
+            tableName: coupons
+            columnNames: id
+            constraintName: pk_coupons
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: promotion
+            baseTableName: coupons
+            baseColumnNames: promotion_id
+            referencedTableSchemaName: promotion
+            referencedTableName: promotions
+            referencedColumnNames: id
+            constraintName: fk_coupons_promotion
+
+        - addUniqueConstraint:
+            schemaName: promotion
+            tableName: coupons
+            columnNames: code
+            constraintName: uk_coupons_code
+
+        - createIndex:
+            schemaName: promotion
+            tableName: coupons
+            indexName: idx_coupons_promotion
+            columns:
+              - column:
+                  name: promotion_id
+
+        - createIndex:
+            schemaName: promotion
+            tableName: coupons
+            indexName: idx_coupons_active
+            columns:
+              - column:
+                  name: is_active
+
+        - createIndex:
+            schemaName: promotion
+            tableName: coupons
+            indexName: idx_coupons_valid_from
+            columns:
+              - column:
+                  name: valid_from
+
+        - createIndex:
+            schemaName: promotion
+            tableName: coupons
+            indexName: idx_coupons_valid_until
+            columns:
+              - column:
+                  name: valid_until
+
+        - createIndex:
+            schemaName: promotion
+            tableName: coupons
+            indexName: idx_coupons_code_active
+            columns:
+              - column:
+                  name: code
+              - column:
+                  name: is_active

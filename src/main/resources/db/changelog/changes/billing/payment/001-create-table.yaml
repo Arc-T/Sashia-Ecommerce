@@ -1,0 +1,143 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1767965259169-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: billing
+            tableName: payments
+            remarks: Stores payment transactions
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: user_id
+                  type: ${integer_value.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: order_id
+                  type: ${integer_value.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: payment_method
+                  # type: ENUM('CARD', 'WEB', 'APP', 'CASH', 'GATEWAY')
+                  type: VARCHAR(500)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: amount
+                  type: ${integer_value.type}
+                  remarks: Amount in Toman
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: status
+                  # type: ENUM('PENDING', 'PAID', 'FAILED', 'REFUNDED')
+                  type: VARCHAR(500)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: authority
+                  type: ${short_text.type}
+                  remarks: Payment gateway authority code
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: reference_id
+                  type: ${short_text.type}
+                  remarks: Gateway reference ID
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: fee_type
+                  type: ${name.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: fee
+                  type: ${integer_value.type}
+                  remarks: Fee in Toman
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: description
+                  type: ${long_text.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+        - addPrimaryKey:
+            schemaName: billing
+            tableName: payments
+            columnNames: id
+            constraintName: pk_payments
+
+        - addUniqueConstraint:
+            schemaName: billing
+            tableName: payments
+            columnNames: reference_id
+            constraintName: uk_payments_reference_id
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: billing
+            baseTableName: payments
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedTableSchemaName: identity
+            referencedColumnNames: id
+            constraintName: fk_payments_user
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: billing
+            baseTableName: payments
+            baseColumnNames: order_id
+            referencedTableName: orders
+            referencedTableSchemaName: ordering
+            referencedColumnNames: id
+            constraintName: fk_payments_order
+
+        - createIndex:
+            schemaName: billing
+            tableName: payments
+            indexName: idx_payments_user
+            columns:
+              - column:
+                  name: user_id
+
+        - createIndex:
+            schemaName: billing
+            tableName: payments
+            indexName: idx_payments_order
+            columns:
+              - column:
+                  name: order_id
+
+        - createIndex:
+            schemaName: billing
+            tableName: payments
+            indexName: idx_payments_reference
+            columns:
+              - column:
+                  name: reference_id

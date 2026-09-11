@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1786650341813-1
+      author: Mr.Arc-T
+      changes:
+        - insert:
+            schemaName: identity
+            tableName: vip_groups
+            columns:
+              - column: { name: name, value: 'DIAMOND' }
+
+        - insert:
+            schemaName: identity
+            tableName: vip_groups
+            columns:
+              - column: { name: name, value: 'GOLD' }
+
+        - insert:
+            schemaName: identity
+            tableName: vip_groups
+            columns:
+              - column: { name: name, value: 'BRONZE' }
+
+        - insert:
+            schemaName: identity
+            tableName: vip_groups
+            columns:
+              - column: { name: name, value: 'IRON' }

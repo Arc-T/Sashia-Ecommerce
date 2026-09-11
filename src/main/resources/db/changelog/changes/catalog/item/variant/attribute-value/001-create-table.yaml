@@ -1,0 +1,107 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1767965215846-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: catalog
+            tableName: item_variant_attribute_values
+            remarks: Maps catalog products to their attribute values.
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: item_variant_id
+                  type: ${id.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: attribute_id
+                  type: ${id.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: attribute_value_id
+                  type: ${id.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+        - addPrimaryKey:
+            schemaName: catalog
+            tableName: item_variant_attribute_values
+            columnNames: id
+            constraintName: pk_item_variant_attribute_values
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: catalog
+            baseTableName: item_variant_attribute_values
+            baseColumnNames: item_variant_id
+            referencedTableSchemaName: catalog
+            referencedTableName: item_variants
+            referencedColumnNames: id
+            constraintName: fk_item_variant_attribute_values_item_variant
+            onDelete: CASCADE
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: catalog
+            baseTableName: item_variant_attribute_values
+            baseColumnNames: attribute_id
+            referencedTableSchemaName: catalog
+            referencedTableName: attributes
+            referencedColumnNames: id
+            constraintName: fk_item_variant_attribute_values_attribute
+            onDelete: CASCADE
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: catalog
+            baseTableName: item_variant_attribute_values
+            baseColumnNames: attribute_value_id
+            referencedTableSchemaName: catalog
+            referencedTableName: attribute_values
+            referencedColumnNames: id
+            constraintName: fk_item_variant_attribute_values_attribute_value
+            onDelete: CASCADE
+
+        - addUniqueConstraint:
+            schemaName: catalog
+            tableName: item_variant_attribute_values
+            columnNames: item_variant_id, attribute_id, attribute_value_id
+            constraintName: uk_item_variant_attribute_values_item_variant_attribute_attribute_value
+
+        - createIndex:
+            schemaName: catalog
+            tableName: item_variant_attribute_values
+            indexName: idx_item_variant_attribute_values_product
+            columns:
+              - column:
+                  name: item_variant_id
+
+        - createIndex:
+            schemaName: catalog
+            tableName: item_variant_attribute_values
+            indexName: idx_item_variant_attribute_values_attribute
+            columns:
+              - column:
+                  name: attribute_id
+
+        - createIndex:
+            schemaName: catalog
+            tableName: item_variant_attribute_values
+            indexName: idx_item_variant_attribute_values_value
+            columns:
+              - column:
+                  name: attribute_value_id

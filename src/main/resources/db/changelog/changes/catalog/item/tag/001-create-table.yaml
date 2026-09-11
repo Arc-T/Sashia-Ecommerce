@@ -1,0 +1,81 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1767965207884-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: catalog
+            tableName: item_tags
+            remarks: Maps catalog items to tags.
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: item_id
+                  type: ${id.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: tag_id
+                  type: ${id.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+        - addPrimaryKey:
+            schemaName: catalog
+            tableName: item_tags
+            columnNames: id
+            constraintName: pk_item_tags
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: catalog
+            baseTableName: item_tags
+            baseColumnNames: item_id
+            referencedTableSchemaName: catalog
+            referencedTableName: items
+            referencedColumnNames: id
+            constraintName: fk_item_tags_item
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: catalog
+            baseTableName: item_tags
+            baseColumnNames: tag_id
+            referencedTableSchemaName: catalog
+            referencedTableName: tags
+            referencedColumnNames: id
+            constraintName: fk_item_tags_tag
+
+        - addUniqueConstraint:
+            schemaName: catalog
+            tableName: item_tags
+            columnNames: item_id, tag_id
+            constraintName: uk_item_tags_item_id_tag_id
+
+        - createIndex:
+            schemaName: catalog
+            tableName: item_tags
+            indexName: idx_item_tags_product
+            columns:
+              - column:
+                  name: item_id
+
+        - createIndex:
+            schemaName: catalog
+            tableName: item_tags
+            indexName: idx_item_tags_tag
+            columns:
+              - column:
+                  name: tag_id

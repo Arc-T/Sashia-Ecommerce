@@ -1,0 +1,73 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1784146599533-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: catalog
+            tableName: attribute_values
+            remarks: Stores predefined values for selectable attributes.
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: attribute_id
+                  type: ${id.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: attribute_value
+                  type: ${name.type}
+                  remarks: Supports Persian values.
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+        - addPrimaryKey:
+            schemaName: catalog
+            tableName: attribute_values
+            columnNames: id
+            constraintName: pk_attribute_values
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: catalog
+            baseTableName: attribute_values
+            baseColumnNames: attribute_id
+            referencedTableSchemaName: catalog
+            referencedTableName: attributes
+            referencedColumnNames: id
+            constraintName: fk_attribute_values_attribute
+
+        - addUniqueConstraint:
+            schemaName: catalog
+            tableName: attribute_values
+            columnNames: attribute_id, attribute_value
+            constraintName: uk_attribute_values_attribute_attribute_value
+
+        - createIndex:
+            schemaName: catalog
+            tableName: attribute_values
+            indexName: idx_attribute_values_attribute
+            columns:
+              - column:
+                  name: attribute_id
+
+        - createIndex:
+            schemaName: catalog
+            tableName: attribute_values
+            indexName: idx_attribute_values_value
+            columns:
+              - column:
+                  name: attribute_value

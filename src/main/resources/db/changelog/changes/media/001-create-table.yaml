@@ -1,0 +1,124 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1784206404650-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: media
+            tableName: media
+            remarks: Stores metadata for uploaded media assets such as images, videos and documents.
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: slug
+                  type: ${name.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: checksum
+                  type: ${short_text.type}
+                  constraints:
+                    nullable: false
+                    unique: true
+
+              - column:
+                  name: size
+                  type: ${id.type}
+                  remarks: File size in bytes.
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: resource_type
+                  type: ${name.type}
+                  remarks: Media resource type enum.
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: resource_id
+                  type: ${id.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: mime_type
+                  type: ${name.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: extension
+                  type: ${name.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: status
+                  type: ${name.type}
+                  remarks: Media status enum.
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: metadata
+                  type: ${json.type}
+                  remarks: Additional media metadata.
+
+              - column:
+                  name: description
+                  type: ${description.type}
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+        - addPrimaryKey:
+            schemaName: media
+            tableName: media
+            columnNames: id
+            constraintName: pk_media
+
+        - createIndex:
+            schemaName: media
+            tableName: media
+            indexName: idx_media_slug
+            columns:
+              - column:
+                  name: slug
+
+        - createIndex:
+            schemaName: media
+            tableName: media
+            indexName: idx_media_checksum
+            columns:
+              - column:
+                  name: checksum
+
+        - createIndex:
+            schemaName: media
+            tableName: media
+            indexName: idx_media_resource
+            columns:
+              - column:
+                  name: resource_type
+              - column:
+                  name: resource_id
+
+        - createIndex:
+            schemaName: media
+            tableName: media
+            indexName: idx_media_status
+            columns:
+              - column:
+                  name: status

@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1785176302023-1
+      author: Mr.Arc-T
+      changes:
+        - insert:
+            schemaName: identity
+            tableName: addresses
+            columns:
+              - column: { name: user_id, valueNumeric: '1' }
+              - column: { name: address_type, value: 'HOME' }
+              - column: { name: province_id, valueNumeric: '3' }
+              - column: { name: address_line, value: 'Just a test address line' }
+              - column: { name: postal_code, valueNumeric: '1234321432' }

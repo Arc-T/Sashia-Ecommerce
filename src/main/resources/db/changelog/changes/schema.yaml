@@ -1,0 +1,45 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1784306527499-1
+      author: Mr.Arc-T
+      comment: Creates all application schemas used by the system.
+      changes:
+        - sql:
+            comment: Financial operations including invoices, payments and refunds.
+            sql: CREATE SCHEMA IF NOT EXISTS billing;
+
+        - sql:
+            comment: Catalog entities including items, products, services, categories, attributes and pricing.
+            sql: CREATE SCHEMA IF NOT EXISTS catalog;
+
+        - sql:
+            comment: User management, authentication and authorization.
+            sql: CREATE SCHEMA IF NOT EXISTS identity;
+
+        - sql:
+            comment: Media management.
+            sql: CREATE SCHEMA IF NOT EXISTS media;
+
+        - sql:
+            comment: SMS notifications, templates and delivery statuses.
+            sql: CREATE SCHEMA IF NOT EXISTS notification;
+
+        - sql:
+            comment: Shopping carts, orders, shipments and order fulfillment.
+            sql: CREATE SCHEMA IF NOT EXISTS ordering;
+
+        - sql:
+            comment: Discounts, coupons, conditions, scopes and usage tracking.
+            sql: CREATE SCHEMA IF NOT EXISTS promotion;
+
+        - sql:
+            comment: Marketplace shops and shop membership management.
+            sql: CREATE SCHEMA IF NOT EXISTS shop;
+
+        - sql:
+            comment: Shared platform infrastructure and future cross-cutting features.
+            sql: CREATE SCHEMA IF NOT EXISTS platform;
+
+        - sql:
+            comment: Logs and system settings.
+            sql: CREATE SCHEMA IF NOT EXISTS system;

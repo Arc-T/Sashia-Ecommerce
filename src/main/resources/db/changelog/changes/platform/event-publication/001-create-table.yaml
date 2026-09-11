@@ -1,0 +1,79 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1784135643445-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: platform
+            tableName: event_publication
+            remarks: Stores Spring Modulith event publication state.
+            columns:
+              - column:
+                  name: id
+                  type: ${uuid.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: completion_date
+                  type: ${timestamp_value.type}
+
+              - column:
+                  name: event_type
+                  type: ${short_text.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: listener_id
+                  type: ${short_text.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: publication_date
+                  type: ${timestamp_value.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: serialized_event
+                  type: ${description.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: status
+                  type: ${name.type}
+
+              - column:
+                  name: completion_attempts
+                  type: ${integer_value.type}
+
+              - column:
+                  name: last_resubmission_date
+                  type: ${timestamp_value.type}
+
+        - addPrimaryKey:
+            schemaName: platform
+            tableName: event_publication
+            columnNames: id
+            constraintName: pk_event_publication
+
+        - createIndex:
+            schemaName: platform
+            tableName: event_publication
+            indexName: idx_event_publication_listener_serialized
+            columns:
+              - column:
+                  name: listener_id
+              - column:
+                  name: serialized_event
+
+        - createIndex:
+            schemaName: platform
+            tableName: event_publication
+            indexName: idx_event_publication_completion_date
+            columns:
+              - column:
+                  name: completion_date

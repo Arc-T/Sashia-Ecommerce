@@ -1,0 +1,59 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1785085335584-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: promotion
+            tableName: condition_operators
+            remarks: Lookup table for supported condition operators.
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: code
+                  type: ${name.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: title
+                  type: ${name.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: description
+                  type: ${description.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: updated_at
+                  type: ${timestamp_value.type}
+                  constraints:
+                    nullable: true
+
+        - addPrimaryKey:
+            schemaName: promotion
+            tableName: condition_operators
+            columnNames: id
+            constraintName: pk_condition_operators
+
+        - addUniqueConstraint:
+            schemaName: promotion
+            tableName: condition_operators
+            columnNames: code
+            constraintName: uk_condition_operators_code

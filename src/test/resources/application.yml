@@ -1,0 +1,72 @@
+spring:
+  profiles:
+    active: test
+
+  mvc:
+    problemdetails:
+      enabled: true
+
+  datasource:
+    url: jdbc:h2:mem:test_db;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    type: org.springframework.jdbc.datasource.DriverManagerDataSource
+    username: root
+    password: 1234321
+
+  web:
+    locale: fa_IR
+    locale-resolver: accept_header
+
+  messages:
+    encoding: UTF-8
+    basename: i18n/messages
+
+  jpa:
+    open-in-view: false
+    show-sql: true
+    generate-ddl: false
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none  # Prevent Hibernate from managing schema
+    defer-datasource-initialization: false
+    properties:
+      hibernate:
+        generate_statistics: TRUE
+        connection:
+          autocommit: false
+        jdbc:
+          fetch_size: 50
+
+  sql:
+    init:
+      mode: never  # Disable spring.sql.init to avoid conflicts with Liquibase
+
+
+  jackson:
+    default-property-inclusion: non_null
+
+  liquibase:
+    enabled: true
+    #    drop-first: true
+    ui-service: console
+    change-log: classpath:db/changelog/test-master.yml
+
+  modulith:
+    events:
+      jdbc:
+        schema: platform
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          authority-prefix: ''
+
+logging:
+  level:
+    com.sashia: debug
+    org.hibernate: debug
+    org.springframework.security: trace
+    com.zaxxer.hikari.HikariConfig: debug
+
+  charset:
+    console: UTF-8

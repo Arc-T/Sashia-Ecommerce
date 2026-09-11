@@ -1,0 +1,86 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1767965080617-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: identity
+            tableName: vip_memberships
+            remarks: Tracks user VIP memberships
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: vip_group_id
+                  type: ${integer_value.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: user_id
+                  type: ${integer_value.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+        - addPrimaryKey:
+            schemaName: identity
+            tableName: vip_memberships
+            columnNames: id
+            constraintName: pk_vip_memberships
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: identity
+            baseTableName: vip_memberships
+            baseColumnNames: vip_group_id
+            referencedTableSchemaName: identity
+            referencedTableName: vip_groups
+            referencedColumnNames: id
+            constraintName: fk_vip_memberships_group
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: identity
+            baseTableName: vip_memberships
+            baseColumnNames: user_id
+            referencedTableSchemaName: identity
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_vip_memberships_user
+
+        - createIndex:
+            schemaName: identity
+            tableName: vip_memberships
+            indexName: idx_vip_memberships_group
+            columns:
+              - column:
+                  name: vip_group_id
+
+        - createIndex:
+            schemaName: identity
+            tableName: vip_memberships
+            indexName: idx_vip_memberships_user
+            columns:
+              - column:
+                  name: user_id
+
+        - createIndex:
+            schemaName: identity
+            unique: true
+            tableName: vip_memberships
+            indexName: idx_vip_memberships_unique
+            columns:
+              - column:
+                  name: user_id
+              - column:
+                  name: vip_group_id

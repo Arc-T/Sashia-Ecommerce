@@ -1,0 +1,58 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1767965281632-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: ordering
+            tableName: carts
+            remarks: Stores user shopping carts
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: user_id
+                  type: ${integer_value.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: updated_at
+                  type: ${timestamp_value.type}
+                  constraints:
+                    nullable: true
+
+        - addPrimaryKey:
+            schemaName: ordering
+            tableName: carts
+            columnNames: id
+            constraintName: pk_carts
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: ordering
+            baseTableName: carts
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedTableSchemaName: identity
+            referencedColumnNames: id
+            constraintName: fk_carts_user
+
+        - createIndex:
+            schemaName: ordering
+            tableName: carts
+            indexName: idx_carts_user
+            columns:
+              - column:
+                  name: user_id

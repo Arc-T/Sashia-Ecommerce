@@ -1,0 +1,305 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1785176533938-1
+      author: Mr.Arc-T
+      changes:
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'READ_ALL_ATTRIBUTES' }
+              - column: { name: description, value: 'Allows viewing all attributes in the system with complete details' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'READ_ATTRIBUTE' }
+              - column: { name: description, value: 'Allows viewing individual attribute details' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'CREATE_ATTRIBUTE' }
+              - column: { name: description, value: 'Allows creating new product attributes and specifications' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'DELETE_ATTRIBUTE' }
+              - column: { name: description, value: 'Allows removing existing attributes from the system' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'UPDATE_ATTRIBUTE' }
+              - column: { name: description, value: 'Allows modifying existing attribute details and configurations' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'READ_ALL_CATEGORIES' }
+              - column: { name: description, value: 'Allows viewing all product categories in the system' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'READ_CATEGORY' }
+              - column: { name: description, value: 'Allows viewing individual category details' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'CREATE_CATEGORY' }
+              - column: { name: description, value: 'Allows creating new product categories and subcategories' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'DELETE_CATEGORY' }
+              - column: { name: description, value: 'Allows removing product categories from the system' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'UPDATE_CATEGORY' }
+              - column: { name: description, value: 'Allows modifying category information and hierarchy' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'READ_ALL_TAGS' }
+              - column: { name: description, value: 'Allows viewing all tags used across the platform' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'READ_TAG' }
+              - column: { name: description, value: 'Allows viewing individual tag details' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'CREATE_TAG' }
+              - column: { name: description, value: 'Allows creating new tags for content organization' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'DELETE_TAG' }
+              - column: { name: description, value: 'Allows removing existing tags from the system' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'UPDATE_TAG' }
+              - column: { name: description, value: 'Allows modifying tag names and associations' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'READ_ALL_DISCOUNTS' }
+              - column: { name: description, value: 'Allows viewing all active and historical discounts' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'READ_DISCOUNT' }
+              - column: { name: description, value: 'Allows viewing individual discount details and conditions' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'CREATE_DISCOUNT' }
+              - column: { name: description, value: 'Allows creating new discount rules and promotions' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'DELETE_DISCOUNT' }
+              - column: { name: description, value: 'Allows removing discount rules from the system' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'UPDATE_DISCOUNT' }
+              - column: { name: description, value: 'Allows modifying discount parameters and validity periods' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'READ_ALL_PRODUCTS' }
+              - column: { name: description, value: 'Allows viewing all products in the inventory' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'READ_PRODUCT' }
+              - column: { name: description, value: 'Allows viewing individual product details' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'CREATE_PRODUCT' }
+              - column: { name: description, value: 'Allows adding new products to the catalog' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'DELETE_PRODUCT' }
+              - column: { name: description, value: 'Allows removing products from the catalog' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'UPDATE_PRODUCT' }
+              - column: { name: description, value: 'Allows modifying product information and pricing' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'READ_ALL_SERVICES' }
+              - column: { name: description, value: 'Allows viewing all available services' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'READ_SERVICE' }
+              - column: { name: description, value: 'Allows viewing individual service details' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'CREATE_SERVICE' }
+              - column: { name: description, value: 'Allows creating new service offerings' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'DELETE_SERVICE' }
+              - column: { name: description, value: 'Allows removing services from the catalog' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'UPDATE_SERVICE' }
+              - column: { name: description, value: 'Allows modifying service details and pricing' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'READ_ALL_SERVICE_GROUPS' }
+              - column: { name: description, value: 'Allows viewing all service groups and bundles' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'READ_SERVICE_GROUP' }
+              - column: { name: description, value: 'Allows viewing individual service group details' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'CREATE_SERVICE_GROUP' }
+              - column: { name: description, value: 'Allows creating new service groups and bundles' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'DELETE_SERVICE_GROUP' }
+              - column: { name: description, value: 'Allows removing service groups from the system' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'UPDATE_SERVICE_GROUP' }
+              - column: { name: description, value: 'Allows modifying service group composition and details' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'READ_ALL_ORDERS' }
+              - column: { name: description, value: 'Allows viewing all customer orders and transactions' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'READ_ORDER' }
+              - column: { name: description, value: 'Allows viewing individual order details and history' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'CREATE_ORDER' }
+              - column: { name: description, value: 'Allows creating new orders and processing checkouts' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'DELETE_ORDER' }
+              - column: { name: description, value: 'Allows canceling and removing orders from the system' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'UPDATE_ORDER' }
+              - column: { name: description, value: 'Allows modifying order status, items, and details' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'ROLE_SUPER_ADMIN' }
+              - column: { name: description, value: 'this role has all the permissions available in every part of the software' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'ROLE_SHOP_OWNER' }
+              - column: { name: description, value: 'this role indicates user access to shop panel' }
+
+        - insert:
+            schemaName: identity
+            tableName: permissions
+            columns:
+              - column: { name: name, value: 'READ_ALL_ATTRIBUTE_TYPES' }
+              - column: { name: description, value: 'Allows viewing all attribute types' }

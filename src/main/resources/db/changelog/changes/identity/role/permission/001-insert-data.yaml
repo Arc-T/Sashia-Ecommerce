@@ -1,0 +1,305 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1785176709675-1
+      author: Mr.Arc-T
+      changes:
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '1' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '2' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '3' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '4' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '5' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '6' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '7' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '8' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '9' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '10' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '11' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '12' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '13' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '14' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '15' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '16' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '17' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '18' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '19' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '20' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '21' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '22' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '23' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '24' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '25' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '26' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '27' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '28' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '29' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '30' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '31' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '32' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '33' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '34' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '35' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '36' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '37' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '38' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '39' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '40' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '41' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '42' }
+
+        - insert:
+            schemaName: identity
+            tableName: role_permissions
+            columns:
+              - column: { name: role_id, valueNumeric: '1' }
+              - column: { name: permission_id, valueNumeric: '43' }

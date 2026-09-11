@@ -1,0 +1,109 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1768464140760-1
+      author: Mr.Arc-T
+      changes:
+        - insert:
+            schemaName: catalog
+            tableName: attribute_values
+            columns:
+              - column: { name: attribute_value, value: 'طلا' }
+              - column: { name: attribute_id, valueNumeric: '2' }
+
+        - insert:
+            schemaName: catalog
+            tableName: attribute_values
+            columns:
+              - column: { name: attribute_value, value: 'نقره' }
+              - column: { name: attribute_id, valueNumeric: '2' }
+
+        - insert:
+            schemaName: catalog
+            tableName: attribute_values
+            columns:
+              - column: { name: attribute_value, value: 'پلاتین' }
+              - column: { name: attribute_id, valueNumeric: '2' }
+
+        - insert:
+            schemaName: catalog
+            tableName: attribute_values
+            columns:
+              - column: { name: attribute_value, value: 'استیل' }
+              - column: { name: attribute_id, valueNumeric: '2' }
+
+        - insert:
+            schemaName: catalog
+            tableName: attribute_values
+            columns:
+              - column: { name: attribute_value, value: 'تیتانیوم' }
+              - column: { name: attribute_id, valueNumeric: '2' }
+
+        - insert:
+            schemaName: catalog
+            tableName: attribute_values
+            columns:
+              - column: { name: attribute_value, value: 'چرم' }
+              - column: { name: attribute_id, valueNumeric: '2' }
+
+        - insert:
+            schemaName: catalog
+            tableName: attribute_values
+            columns:
+              - column: { name: attribute_value, value: 'پلاستیک' }
+              - column: { name: attribute_id, valueNumeric: '2' }
+
+        - insert:
+            schemaName: catalog
+            tableName: attribute_values
+            columns:
+              - column: { name: attribute_value, value: 'سیلیکون' }
+              - column: { name: attribute_id, valueNumeric: '2' }
+
+        - insert:
+            schemaName: catalog
+            tableName: attribute_values
+            columns:
+              - column: { name: attribute_value, value: 'فلز' }
+              - column: { name: attribute_id, valueNumeric: '2' }
+
+        - insert:
+            schemaName: catalog
+            tableName: attribute_values
+            columns:
+              - column: { name: attribute_value, value: 'الماس' }
+              - column: { name: attribute_id, valueNumeric: '1' }
+
+        - insert:
+            schemaName: catalog
+            tableName: attribute_values
+            columns:
+              - column: { name: attribute_value, value: 'یاقوت' }
+              - column: { name: attribute_id, valueNumeric: '1' }
+
+        - insert:
+            schemaName: catalog
+            tableName: attribute_values
+            columns:
+              - column: { name: attribute_value, value: 'زمرد' }
+              - column: { name: attribute_id, valueNumeric: '1' }
+
+        - insert:
+            schemaName: catalog
+            tableName: attribute_values
+            columns:
+              - column: { name: attribute_value, value: 'یاقوت کبود' }
+              - column: { name: attribute_id, valueNumeric: '1' }
+
+        - insert:
+            schemaName: catalog
+            tableName: attribute_values
+            columns:
+              - column: { name: attribute_value, value: 'مروارید' }
+              - column: { name: attribute_id, valueNumeric: '1' }
+
+        - insert:
+            schemaName: catalog
+            tableName: attribute_values
+            columns:
+              - column: { name: attribute_value, value: 'عقیق' }
+              - column: { name: attribute_id, valueNumeric: '1' }

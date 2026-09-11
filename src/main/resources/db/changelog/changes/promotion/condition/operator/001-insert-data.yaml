@@ -1,0 +1,60 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1785176982578-1
+      author: Mr.Arc-T
+      changes:
+        - insert:
+            schemaName: promotion
+            tableName: condition_operators
+            columns:
+              - column: { name: code, value: 'EQ' }
+              - column: { name: title, value: 'Equals' }
+              - column: { name: description, value: 'Value must equal the expected value.' }
+
+        - insert:
+            schemaName: promotion
+            tableName: condition_operators
+            columns:
+              - column: { name: code, value: 'NEQ' }
+              - column: { name: title, value: 'Not Equals' }
+              - column: { name: description, value: 'Value must not equal the expected value.' }
+
+        - insert:
+            schemaName: promotion
+            tableName: condition_operators
+            columns:
+              - column: { name: code, value: 'GT' }
+              - column: { name: title, value: 'Greater Than' }
+              - column: { name: description, value: 'Value must be greater than the expected value.' }
+
+        - insert:
+            schemaName: promotion
+            tableName: condition_operators
+            columns:
+              - column: { name: code, value: 'GTE' }
+              - column: { name: title, value: 'Greater Than Or Equal' }
+              - column: { name: description, value: 'Value must be greater than or equal to the expected value.' }
+
+        - insert:
+            schemaName: promotion
+            tableName: condition_operators
+            columns:
+              - column: { name: code, value: 'LT' }
+              - column: { name: title, value: 'Less Than' }
+              - column: { name: description, value: 'Value must be less than the expected value.' }
+
+        - insert:
+            schemaName: promotion
+            tableName: condition_operators
+            columns:
+              - column: { name: code, value: 'LTE' }
+              - column: { name: title, value: 'Less Than Or Equal' }
+              - column: { name: description, value: 'Value must be less than or equal to the expected value.' }
+
+        - insert:
+            schemaName: promotion
+            tableName: condition_operators
+            columns:
+              - column: { name: code, value: 'IN' }
+              - column: { name: title, value: 'In' }
+              - column: { name: description, value: 'Value must exist in the provided collection.' }
