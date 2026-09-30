@@ -1,0 +1,89 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1784286890318-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: ordering
+            tableName: delivery_transactions
+            remarks: Stores the chronological history of delivery status changes.
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: delivery_id
+                  type: ${id.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: delivery_status_id
+                  type: ${id.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: description
+                  type: ${description.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+        - addPrimaryKey:
+            schemaName: ordering
+            tableName: delivery_transactions
+            columnNames: id
+            constraintName: pk_delivery_transactions
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: ordering
+            baseTableName: delivery_transactions
+            baseColumnNames: delivery_id
+            referencedTableSchemaName: ordering
+            referencedTableName: deliveries
+            referencedColumnNames: id
+            constraintName: fk_delivery_transactions_delivery
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: ordering
+            baseTableName: delivery_transactions
+            baseColumnNames: delivery_status_id
+            referencedTableSchemaName: ordering
+            referencedTableName: delivery_statuses
+            referencedColumnNames: id
+            constraintName: fk_delivery_transactions_status
+
+        - createIndex:
+            schemaName: ordering
+            tableName: delivery_transactions
+            indexName: idx_delivery_transactions_delivery
+            columns:
+              - column:
+                  name: delivery_id
+
+        - createIndex:
+            schemaName: ordering
+            tableName: delivery_transactions
+            indexName: idx_delivery_transactions_status
+            columns:
+              - column:
+                  name: delivery_status_id
+
+        - createIndex:
+            schemaName: ordering
+            tableName: delivery_transactions
+            indexName: idx_delivery_transactions_created_at
+            columns:
+              - column:
+                  name: created_at

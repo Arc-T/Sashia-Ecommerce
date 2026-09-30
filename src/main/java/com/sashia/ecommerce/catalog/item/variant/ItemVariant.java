@@ -155,7 +155,7 @@ public class ItemVariant implements Promotable {
     @Override
     @Transient
     public List<AppliedPromotion> getAppliedPromotions() {
-        return appliedPromotions;
+        return this.appliedPromotions;
     }
 
     @Override

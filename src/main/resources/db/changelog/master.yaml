@@ -29,7 +29,7 @@ databaseChangeLog:
   - include:
       file: db/changelog/changes/shop/001-create-table.yaml
   - include:
-      file: db/changelog/changes/catalog/item/delivery-option/001-create-table.yaml
+      file: db/changelog/changes/ordering/delivery/option/001-create-table.yaml
   - include:
       file: db/changelog/changes/catalog/category/001-create-table.yaml
   - include:
@@ -87,11 +87,11 @@ databaseChangeLog:
   - include:
       file: db/changelog/changes/ordering/wishlist/001-create-table.yaml
   - include:
-      file: db/changelog/changes/ordering/shipment/status/001-create-table.yaml
+      file: db/changelog/changes/ordering/delivery/status/001-create-table.yaml
   - include:
-      file: db/changelog/changes/ordering/shipment/001-create-table.yaml
+      file: db/changelog/changes/ordering/delivery/001-create-table.yaml
   - include:
-      file: db/changelog/changes/ordering/shipment/transaction/001-create-table.yaml
+      file: db/changelog/changes/ordering/delivery/transaction/001-create-table.yaml
   - include:
       file: db/changelog/changes/ordering/cart/001-create-table.yaml
   - include:

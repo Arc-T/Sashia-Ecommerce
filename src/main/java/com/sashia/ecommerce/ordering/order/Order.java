@@ -2,11 +2,12 @@ package com.sashia.ecommerce.ordering.order;
 
 import com.sashia.ecommerce.billing.invoice.Invoice;
 import com.sashia.ecommerce.billing.payment.Payment;
-import com.sashia.ecommerce.catalog.item.ItemDeliveryOption;
+import com.sashia.ecommerce.ordering.delivery.DeliveryDetails;
+import com.sashia.ecommerce.ordering.delivery.option.DeliveryOption;
 import com.sashia.ecommerce.catalog.item.dto.ItemType;
 import com.sashia.ecommerce.identity.user.User;
 import com.sashia.ecommerce.ordering.order.dto.OrderStatusType;
-import com.sashia.ecommerce.ordering.order.internal.OrderTransaction;
+import com.sashia.ecommerce.ordering.order.transaction.OrderTransaction;
 import com.sashia.ecommerce.promotion.Promotion;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -54,7 +55,7 @@ public class Order {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private ItemDeliveryOption itemDeliveryOption;
+    private DeliveryOption deliveryOption;
 
     /* ******************************* TABLE RELATIONS ******************************** */
 
@@ -171,12 +172,12 @@ public class Order {
         this.user = user;
     }
 
-    public ItemDeliveryOption getItemDeliveryOption() {
-        return itemDeliveryOption;
+    public DeliveryOption getItemDeliveryOption() {
+        return deliveryOption;
     }
 
-    public void setItemDeliveryOption(ItemDeliveryOption itemDeliveryOption) {
-        this.itemDeliveryOption = itemDeliveryOption;
+    public void setItemDeliveryOption(DeliveryOption deliveryOption) {
+        this.deliveryOption = deliveryOption;
     }
 
     public Set<OrderCharge> getOrderCharges() {

@@ -1,0 +1,123 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1784294094528-1
+      author: Mr.Arc-T
+      changes:
+        - createTable:
+            schemaName: ordering
+            tableName: deliveries
+            remarks: Stores delivery information for customer orders.
+            columns:
+              - column:
+                  name: id
+                  type: ${id.type}
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: order_id
+                  type: ${id.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: delivery_status_id
+                  type: ${id.type}
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: currency
+                  type: ${name.type}
+                  remarks: Currency code for delivery cost (e.g. IRR, USD).
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: cost
+                  type: ${price.type}
+                  remarks: Delivery cost, used for pricing and promotion calculations.
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: tracking_number
+                  type: ${name.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: carrier
+                  type: ${name.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: description
+                  type: ${description.type}
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: created_at
+                  type: ${timestamp_value.type}
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+        - addPrimaryKey:
+            schemaName: ordering
+            tableName: deliveries
+            columnNames: id
+            constraintName: pk_deliveries
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: ordering
+            baseTableName: deliveries
+            baseColumnNames: order_id
+            referencedTableSchemaName: ordering
+            referencedTableName: orders
+            referencedColumnNames: id
+            constraintName: fk_deliveries_order
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: ordering
+            baseTableName: deliveries
+            baseColumnNames: delivery_status_id
+            referencedTableSchemaName: ordering
+            referencedTableName: delivery_statuses
+            referencedColumnNames: id
+            constraintName: fk_deliveries_status
+
+        - createIndex:
+            schemaName: ordering
+            tableName: deliveries
+            indexName: idx_deliveries_order
+            columns:
+              - column:
+                  name: order_id
+
+        - createIndex:
+            schemaName: ordering
+            tableName: deliveries
+            indexName: idx_deliveries_status
+            columns:
+              - column:
+                  name: delivery_status_id
+
+        - createIndex:
+            schemaName: ordering
+            tableName: deliveries
+            indexName: idx_deliveries_currency
+            columns:
+              - column:
+                  name: currency
+
+        - createIndex:
+            schemaName: ordering
+            tableName: deliveries
+            indexName: idx_deliveries_tracking_number
+            columns:
+              - column:
+                  name: tracking_number

@@ -22,7 +22,7 @@ databaseChangeLog:
                     nullable: false
 
               - column:
-                  name: item_delivery_option_id
+                  name: delivery_option_id
                   type: ${id.type}
                   constraints:
                     nullable: false
@@ -167,9 +167,9 @@ databaseChangeLog:
         - addForeignKeyConstraint:
             baseTableSchemaName: ordering
             baseTableName: orders
-            baseColumnNames: item_delivery_option_id
-            referencedTableSchemaName: catalog
-            referencedTableName: item_delivery_options
+            baseColumnNames: delivery_option_id
+            referencedTableSchemaName: ordering
+            referencedTableName: delivery_options
             referencedColumnNames: id
             constraintName: fk_orders_delivery_option
 
@@ -190,10 +190,10 @@ databaseChangeLog:
         - createIndex:
             schemaName: ordering
             tableName: orders
-            indexName: idx_orders_item_delivery_option
+            indexName: delivery_option
             columns:
               - column:
-                  name: item_delivery_option_id
+                  name: delivery_option_id
 
         - createIndex:
             schemaName: ordering

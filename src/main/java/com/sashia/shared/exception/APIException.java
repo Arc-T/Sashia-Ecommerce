@@ -4,18 +4,15 @@ public abstract class APIException extends RuntimeException {
 
     private final String messageKey;
     private final Object[] messageArgs;
-    private final ErrorCategory errorCategory;
 
-    protected APIException(String messageKey, ErrorCategory errorCategory) {
+    protected APIException(String messageKey) {
         this.messageKey = messageKey;
-        this.errorCategory = errorCategory;
         this.messageArgs = null;
     }
 
-    protected APIException(String messageKey, ErrorCategory errorCategory, Object... messageArgs) {
+    protected APIException(String messageKey, Object... messageArgs) {
         this.messageKey = messageKey;
         this.messageArgs = messageArgs;
-        this.errorCategory = errorCategory;
     }
 
     public String getMessageKey() {
@@ -24,10 +21,6 @@ public abstract class APIException extends RuntimeException {
 
     public Object[] getMessageArgs() {
         return messageArgs;
-    }
-
-    public ErrorCategory getErrorCategory() {
-        return errorCategory;
     }
 
 }

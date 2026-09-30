@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1790713891455-1
+      author: Mr.Arc-T
+      changes:
+        - insert:
+            schemaName: ordering
+            tableName: delivery_options
+            columns:
+              - column: { name: name, value: 'اسنپ' }
+              - column: { name: item_type, value: 'PRODUCT' }
+              - column: { name: currency, value: 'IRR' }
+              - column: { name: cost, valueNumeric: '2000' }
+              - column: { name: description, value: 'برای افراد ساکن اصفهان' }

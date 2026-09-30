@@ -1,14 +1,14 @@
 package com.sashia.ecommerce.promotion.engine.context;
 
 import com.sashia.ecommerce.catalog.item.variant.ItemVariant;
-import com.sashia.ecommerce.ordering.shipment.Shipment;
+import com.sashia.ecommerce.ordering.delivery.option.DeliveryOption;
 import com.sashia.ecommerce.pricing.Priceable;
 import com.sashia.ecommerce.promotion.Promotion;
 import com.sashia.ecommerce.promotion.coupon.Coupon;
 import com.sashia.ecommerce.promotion.engine.dto.CartPromotionRequest;
 import com.sashia.ecommerce.promotion.engine.dto.ItemPromotionRequest;
 import com.sashia.ecommerce.promotion.engine.dto.PromotionRequest;
-import com.sashia.ecommerce.promotion.engine.dto.ShipmentPromotionRequest;
+import com.sashia.ecommerce.promotion.engine.dto.DeliveryPromotionRequest;
 import com.sashia.ecommerce.promotion.engine.effect.PromotionEffect;
 
 import java.util.*;
@@ -57,7 +57,7 @@ public class PromotionContext {
     }
 
     private void initialCandidateMaps() {
-        if (request instanceof CartPromotionRequest(Coupon _, Shipment shipment, List<ItemVariant> itemVariants)) {
+        if (request instanceof CartPromotionRequest(Coupon _, DeliveryOption deliveryOption, List<ItemVariant> itemVariants)) {
             candidates.put(PromotableType.ITEM_VARIANT,
                     new PromotionCandidates(
                             itemVariants
@@ -71,7 +71,7 @@ public class PromotionContext {
 
             candidates.put(PromotableType.SHIPPING,
                     new PromotionCandidates(
-                            Map.of(shipment.getId(), shipment)
+                            Map.of(deliveryOption.getId(), deliveryOption)
                     )
             );
 
@@ -86,12 +86,12 @@ public class PromotionContext {
                                     )
                     )
             );
-        } else if (request instanceof ShipmentPromotionRequest(List<Shipment> shipments)) {
+        } else if (request instanceof DeliveryPromotionRequest(List<DeliveryOption> itemDeliveries)) {
             candidates.put(PromotableType.SHIPPING, new PromotionCandidates(
-                            shipments
+                            itemDeliveries
                                     .stream()
                                     .collect(
-                                            Collectors.toMap(Shipment::getId,
+                                            Collectors.toMap(DeliveryOption::getId,
                                                     Function.identity())
                                     )
                     )

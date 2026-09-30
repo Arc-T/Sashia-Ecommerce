@@ -12,9 +12,9 @@
         <relativePath/>
     </parent>
     <groupId>com.sashia</groupId>
-    <artifactId>atrastones</artifactId>
+    <artifactId>ecommerce</artifactId>
     <version>1.0.0</version>
-    <name>atrastones</name>
+    <name>ecommerce</name>
     <description>Demo project for Spring Boot</description>
     <url>https://ecommerce.sashia.com</url>
     <licenses>

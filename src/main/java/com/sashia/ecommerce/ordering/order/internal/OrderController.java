@@ -5,6 +5,9 @@ import com.sashia.ecommerce.ordering.order.dto.CheckoutRequest;
 import com.sashia.ecommerce.ordering.order.dto.OrderDTO;
 import com.sashia.ecommerce.ordering.order.dto.OrderSearchDTO;
 import jakarta.validation.Valid;
+
+import java.net.URI;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -35,8 +38,8 @@ class OrderController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('CREATE_ORDER')")
-    ResponseEntity<Long> create(@RequestBody @Valid CheckoutRequest request) {
-        return ResponseEntity.ok(orderService.create(request));
+    ResponseEntity<?> create(@RequestBody @Valid CheckoutRequest request) {
+        return ResponseEntity.created(URI.create("/orders/" + orderService.create(request))).build();
     }
 
 }

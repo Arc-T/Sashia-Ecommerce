@@ -25,7 +25,7 @@ databaseChangeLog:
             sql: CREATE SCHEMA IF NOT EXISTS notification;
 
         - sql:
-            comment: Shopping carts, orders, shipments and order fulfillment.
+            comment: Shopping carts, orders, deliveries and order fulfillment.
             sql: CREATE SCHEMA IF NOT EXISTS ordering;
 
         - sql:
