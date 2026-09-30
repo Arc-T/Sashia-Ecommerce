@@ -22,6 +22,12 @@ databaseChangeLog:
                     nullable: false
 
               - column:
+                  name: code
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+
+              - column:
                   name: item_type
                   type: ${name.type}
                   remarks: Item delivery method enum.

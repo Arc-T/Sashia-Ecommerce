@@ -56,7 +56,7 @@ databaseChangeLog:
                     nullable: false
 
               - column:
-                  name: shipping_cost
+                  name: delivery_cost
                   type: ${price.type}
                   defaultValueNumeric: '0'
                   constraints:
@@ -90,6 +90,12 @@ databaseChangeLog:
                     nullable: false
 
               # ===================== DELIVERY =====================
+
+              - column:
+                  name: delivery_method
+                  type: ${name.type}
+                  constraints:
+                    nullable: false
 
               - column:
                   name: delivery_address

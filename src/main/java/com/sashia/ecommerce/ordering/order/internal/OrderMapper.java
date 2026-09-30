@@ -1,13 +1,13 @@
 package com.sashia.ecommerce.ordering.order.internal;
 
-import com.sashia.ecommerce.ordering.delivery.DeliveryDetails;
-import com.sashia.ecommerce.ordering.delivery.option.DeliveryMethod;
-import com.sashia.ecommerce.ordering.delivery.option.DeliveryOption;
 import com.sashia.ecommerce.catalog.item.dto.ItemType;
 import com.sashia.ecommerce.catalog.item.variant.ItemVariant;
 import com.sashia.ecommerce.identity.user.User;
+import com.sashia.ecommerce.ordering.delivery.DeliveryDetails;
+import com.sashia.ecommerce.ordering.delivery.option.DeliveryOption;
 import com.sashia.ecommerce.ordering.order.*;
 import com.sashia.ecommerce.ordering.order.dto.CheckoutRequest;
+import com.sashia.ecommerce.ordering.order.dto.OrderStatusType;
 import com.sashia.ecommerce.promotion.engine.dto.AppliedPromotion;
 
 import java.math.BigDecimal;
@@ -22,7 +22,7 @@ public final class OrderMapper {
     private OrderMapper() {
     }
 
-    public static Order toEntity(CheckoutRequest request, User user, DeliveryOption deliveryOption,
+    public static Order toEntity(CheckoutRequest checkoutRequest, User user, DeliveryOption deliveryOption,
                                  List<ItemVariant> itemVariants, String orderNumber) {
 
         Order order = new Order();
@@ -30,19 +30,20 @@ public final class OrderMapper {
 
         order.setUser(user);
         order.setOrderNumber(orderNumber);
-        order.setStatus(com.sashia.ecommerce.ordering.order.dto.OrderStatusType.PENDING);
         order.setItemType(ItemType.PRODUCT); //TODO: derive from cart, not hardcoded
-        order.setUserNote(request.description());
-        order.setDelivery(toDeliveryDetails(request));
         order.setOrderDetails(orderDetails);
+        order.setStatus(OrderStatusType.PENDING);
+        order.setItemDeliveryOption(deliveryOption);
+        order.setUserNote(checkoutRequest.description());
         order.setPricing(toPricingDetails(deliveryOption, orderDetails));
+        order.setDelivery(toDeliveryDetails(checkoutRequest, deliveryOption));
 
         return order;
     }
 
-    private static DeliveryDetails toDeliveryDetails(CheckoutRequest request) {
+    private static DeliveryDetails toDeliveryDetails(CheckoutRequest request, DeliveryOption deliveryOption) {
         return new DeliveryDetails(
-                DeliveryMethod.SHIPPING, //TODO: derive from delivery option, not hardcoded
+                deliveryOption.getCode(), //TODO: derive from delivery option, not hardcoded
                 request.delivery().address(),
                 request.delivery().receiverName(),
                 request.delivery().receiverPhone(),

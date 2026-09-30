@@ -17,6 +17,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class OrderControllerTest extends BaseControllerTest {
@@ -35,7 +36,8 @@ public class OrderControllerTest extends BaseControllerTest {
             mockMvc().perform(post(BASE_URL)
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(objectMapper().writeValueAsString(getRequest())))
-                    .andExpect(status().isCreated());
+                    .andExpect(status().isCreated())
+                    .andDo(print());
         }
 
         //TODO: Get all the dtos from database not hardcoded !

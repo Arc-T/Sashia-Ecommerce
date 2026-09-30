@@ -22,3 +22,5 @@ databaseChangeLog:
       file: db/changelog/changes/identity/vip/group/001-insert-data.yaml
   - include:
       file: db/changelog/changes/identity/vip/membership/001-insert-data.yaml
+  - include:
+      file: db/changelog/changes/ordering/delivery/option/001-insert-data.yaml

@@ -8,6 +8,7 @@ databaseChangeLog:
             tableName: delivery_options
             columns:
               - column: { name: name, value: 'اسنپ' }
+              - column: { name: code, value: 'SNAP' }
               - column: { name: item_type, value: 'PRODUCT' }
               - column: { name: currency, value: 'IRR' }
               - column: { name: cost, valueNumeric: '2000' }

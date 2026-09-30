@@ -28,6 +28,9 @@ public class DeliveryOption implements Promotable {
     private String name;
 
     @Enumerated(EnumType.STRING)
+    private DeliveryMethod code;
+
+    @Enumerated(EnumType.STRING)
     private ItemType itemType;
 
     @Enumerated(EnumType.STRING)
@@ -82,6 +85,14 @@ public class DeliveryOption implements Promotable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public DeliveryMethod getCode() {
+        return code;
+    }
+
+    public void setCode(DeliveryMethod code) {
+        this.code = code;
     }
 
     public ItemType getItemType() {

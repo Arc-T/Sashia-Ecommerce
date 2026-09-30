@@ -7,22 +7,30 @@ databaseChangeLog:
             schemaName: ordering
             tableName: order_statuses
             columns:
-              - column: { name: name, value: 'PENDING' }
+              - column: { name: name, value: 'در حال پردازش' }
+              - column: { name: type, value: 'PENDING' }
+              - column: { name: active, valueBoolean: 'true' }
 
         - insert:
             schemaName: ordering
             tableName: order_statuses
             columns:
-              - column: { name: name, value: 'DELIVERED' }
+              - column: { name: name, value: 'تحویل داده شد' }
+              - column: { name: type, value: 'DELIVERED' }
+              - column: { name: active, valueBoolean: 'true' }
 
         - insert:
             schemaName: ordering
             tableName: order_statuses
             columns:
-              - column: { name: name, value: 'RETURNED' }
+              - column: { name: name, value: 'بازگشت داده شد' }
+              - column: { name: type, value: 'RETURNED' }
+              - column: { name: active, valueBoolean: 'true' }
 
         - insert:
             schemaName: ordering
             tableName: order_statuses
             columns:
-              - column: { name: name, value: 'CANCELLED' }
+              - column: { name: name, value: 'منصرف شد' }
+              - column: { name: type, value: 'CANCELLED' }
+              - column: { name: active, valueBoolean: 'true' }

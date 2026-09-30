@@ -14,7 +14,7 @@ public record PricingDetails(
         BigDecimal deliveryCost,
         BigDecimal tax,
         BigDecimal additionalCharges,
-        BigDecimal discountAmount,
+        BigDecimal discount,
         BigDecimal total) {
 
 }
