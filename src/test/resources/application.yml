@@ -6,6 +6,9 @@ spring:
     problemdetails:
       enabled: true
 
+  config:
+    import: classpath:bank/zarinpal.yaml
+
   datasource:
     url: jdbc:h2:mem:test_db;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     type: org.springframework.jdbc.datasource.DriverManagerDataSource
@@ -70,3 +73,10 @@ logging:
 
   charset:
     console: UTF-8
+
+payment:
+  gateways:
+    zarinpal:
+      merchant-id: ${ZARINPAL_MERCHANT_ID}   # sandbox merchant from panel
+      sandbox: true                           # → sandbox.zarinpal.com
+      callback-url: http://localhost:8080/payments/callback

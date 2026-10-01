@@ -6,7 +6,12 @@ import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.function.Supplier;
 
+/**
+ * Per-transaction lock to prevent concurrent initiate/verify races
+ * on the same order (or payment id).
+ */
 @Component
 public class PaymentLockService {
 
@@ -14,26 +19,31 @@ public class PaymentLockService {
 
     private final ConcurrentHashMap<Long, ReentrantLock> locks = new ConcurrentHashMap<>();
 
-    public void executeTask(long transactionId, Runnable task) {
-        ReentrantLock reentrantLock = locks.computeIfAbsent(transactionId, _ -> new ReentrantLock());
-        reentrantLock.lock();
-        try {
-            log.debug("Lock acquired for transactionId {}", transactionId);
+    public void execute(long lockKey, Runnable task) {
+        execute(lockKey, () -> {
             task.run();
-            log.debug("Task executed for transactionId {}", transactionId);
+            return null;
+        });
+    }
+
+    public <T> T execute(long lockKey, Supplier<T> task) {
+        ReentrantLock lock = locks.computeIfAbsent(lockKey, _ -> new ReentrantLock());
+        lock.lock();
+        try {
+            log.debug("Lock acquired for key {}", lockKey);
+            return task.get();
         } catch (Exception e) {
-            log.error("Error occurred while executing task", e);
+            log.error("Error while executing locked task for key {}", lockKey, e);
             throw e;
         } finally {
             try {
-                reentrantLock.unlock();
+                lock.unlock();
             } finally {
-                if (!reentrantLock.hasQueuedThreads()) {
-                    locks.remove(transactionId, reentrantLock);
-                    log.debug("Lock removed for transactionId {}", transactionId);
+                if (!lock.hasQueuedThreads()) {
+                    locks.remove(lockKey, lock);
+                    log.debug("Lock removed for key {}", lockKey);
                 }
             }
         }
     }
-
 }

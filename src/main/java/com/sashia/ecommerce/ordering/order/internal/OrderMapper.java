@@ -33,7 +33,7 @@ public final class OrderMapper {
         order.setItemType(ItemType.PRODUCT); //TODO: derive from cart, not hardcoded
         order.setOrderDetails(orderDetails);
         order.setStatus(OrderStatusType.PENDING);
-        order.setItemDeliveryOption(deliveryOption);
+        order.setDeliveryOption(deliveryOption);
         order.setUserNote(checkoutRequest.description());
         order.setPricing(toPricingDetails(deliveryOption, orderDetails));
         order.setDelivery(toDeliveryDetails(checkoutRequest, deliveryOption));

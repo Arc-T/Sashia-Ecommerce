@@ -1,19 +1,31 @@
 package com.sashia.ecommerce.billing.payment.opg.provider.zarinpal;
 
-record ZarinpalResponse(
-        SuccessResponse data,
-        ErrorResponse errors
+import tools.jackson.databind.PropertyNamingStrategies;
+import tools.jackson.databind.annotation.JsonNaming;
+
+/**
+ * Response envelope from Zarinpal request / verify APIs.
+ */
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+public record ZarinpalResponse(
+        Data data,
+        Object errors
 ) {
-    record SuccessResponse(
-            Long code,
+
+    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+    public record Data(
+            Integer code,
             String message,
             String authority,
             String feeType,
-            Integer fee
+            Integer fee,
+            Long refId,
+            String cardHash,
+            String cardPan
     ) {
     }
 
-    record ErrorResponse() {
+    public boolean isSuccess() {
+        return data != null && data.code() != null && data.code() == 100;
     }
-
 }

@@ -24,6 +24,7 @@ import com.sashia.ecommerce.promotion.engine.dto.CartPromotionRequest;
 import com.sashia.shared.exception.BusinessRuleException;
 import com.sashia.shared.exception.ResourceNotFoundException;
 import com.sashia.shared.util.SecurityUtils;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class OrderServiceImpl implements OrderService {
 
@@ -46,20 +48,9 @@ public class OrderServiceImpl implements OrderService {
     private final DeliveryOptionRepository deliveryOptionRepository;
     private final OrderTransactionRepository orderTransactionRepository;
 
-    public OrderServiceImpl(UserRepository userRepository, OrderRepository orderRepository, PromotionEngine promotionEngine, ItemVariantRepository itemVariantRepository, OrderStatusRepository orderStatusRepository, OrderTransactionRepository orderTransactionRepository, DeliveryOptionRepository deliveryOptionRepository) {
-        this.userRepository = userRepository;
-        this.orderRepository = orderRepository;
-        this.promotionEngine = promotionEngine;
-        this.itemVariantRepository = itemVariantRepository;
-        this.orderStatusRepository = orderStatusRepository;
-        this.deliveryOptionRepository = deliveryOptionRepository;
-        this.orderTransactionRepository = orderTransactionRepository;
-    }
-
     @Override
     @Transactional
     public Long create(CheckoutRequest request) {
-
         DeliveryOption deliveryOption = deliveryOptionRepository.findById(request.delivery().deliveryOptionId())
                 .orElseThrow(() -> new ResourceNotFoundException("item.delivery.not.found"));
 
@@ -77,10 +68,30 @@ public class OrderServiceImpl implements OrderService {
         return order.getId();
     }
 
+    @Override
+    @Transactional
+    public void transitionStatus(Long orderId, OrderStatusType newStatus, String description) {
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new ResourceNotFoundException("order.not.found"));
+
+        OrderStatusType current = order.getStatus();
+        if (current == newStatus) {
+            return;
+        }
+
+        if (current == null || !current.canTransitionTo(newStatus)) {
+            throw new BusinessRuleException("order.status.transition.invalid");
+        }
+
+        order.setStatus(newStatus);
+        orderRepository.save(order);
+        recordStatusTransition(order, newStatus, description);
+    }
+
     /* =============================== RESOLUTION =============================== */
 
     private Coupon resolveCoupon() {
-        return null; //TODO: full coupon resolution
+        return null; // TODO: full coupon resolution
     }
 
     private List<ItemVariant> resolveItemVariants(CheckoutRequest request) {
@@ -93,14 +104,29 @@ public class OrderServiceImpl implements OrderService {
                     .findByIdAndItemIdForUpdate(cartItemVariant.id(), cartItem.id())
                     .orElseThrow(() -> new ResourceNotFoundException("item.not.found"));
 
-            if (itemVariant.getStock() < cartItemVariant.quantity())
+            if (itemVariant.getStock() < cartItemVariant.quantity()) {
                 throw new BusinessRuleException("checkout.item.stock.exceed");
+            }
 
             itemVariant.setQuantity(cartItemVariant.quantity());
             itemVariants.add(itemVariant);
         }
 
         return itemVariants;
+    }
+
+    /* =============================== STATUS =============================== */
+
+    private void recordStatusTransition(Order order, OrderStatusType type, String description) {
+        OrderStatus status = orderStatusRepository.findByType(type)
+                .orElseThrow(() -> new IllegalStateException("Missing OrderStatus row for type: " + type));
+
+        OrderTransaction transaction = new OrderTransaction();
+        transaction.setOrder(order);
+        transaction.setOrderStatus(status);
+        transaction.setDescription(description);
+
+        orderTransactionRepository.save(transaction);
     }
 
     /* =============================== PERSISTENCE SIDE-EFFECTS =============================== */
@@ -114,18 +140,6 @@ public class OrderServiceImpl implements OrderService {
             itemVariant.setStock(itemVariant.getStock() - itemVariant.getQuantity());
         }
         itemVariantRepository.saveAll(itemVariants);
-    }
-
-    private void recordStatusTransition(Order order, OrderStatusType type, String description) {
-        OrderStatus status = orderStatusRepository.findByType(type)
-                .orElseThrow(() -> new IllegalStateException("Missing OrderStatus row for type: " + type));
-
-        OrderTransaction transaction = new OrderTransaction();
-        transaction.setOrder(order);
-        transaction.setOrderStatus(status);
-        transaction.setDescription(description);
-
-        orderTransactionRepository.save(transaction);
     }
 
     /* =========================== NOT YET IMPLEMENTED =========================== */
@@ -143,5 +157,4 @@ public class OrderServiceImpl implements OrderService {
     public Page<OrderDTO> getAll(Pageable pageable, OrderSearchDTO search) {
         return null;
     }
-
 }

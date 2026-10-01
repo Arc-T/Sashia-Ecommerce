@@ -1,15 +1,32 @@
 package com.sashia.ecommerce.billing.payment;
 
 import com.sashia.ecommerce.billing.payment.dto.PaymentDTO;
+import com.sashia.ecommerce.billing.payment.opg.PaymentGatewayType;
+import com.sashia.ecommerce.billing.payment.opg.dto.PaymentInitiateRequest;
+import com.sashia.ecommerce.billing.payment.opg.dto.PaymentInitiateResult;
+import com.sashia.ecommerce.billing.payment.opg.dto.PaymentVerifyRequest;
+import com.sashia.ecommerce.billing.payment.opg.dto.PaymentVerifyResult;
 
-interface PaymentService {
+import java.util.Optional;
 
-    /* ******************************** CRUD ******************************** */
+/**
+ * Application service for payments: gateway orchestration + persistence.
+ */
+public interface PaymentService {
 
-    Long create(PaymentDTO payment);
+    /**
+     * Initiate payment at the selected gateway and persist a PENDING payment row.
+     */
+    PaymentInitiateResult initiate(PaymentInitiateRequest request);
 
-    /* ******************************** OPERATIONS ******************************** */
-    //int amount, String authority, long userId
-    PaymentDTO verifyPayment();
+    /**
+     * Verify payment at the gateway (callback / client return) and update the payment row.
+     */
+    PaymentVerifyResult verify(PaymentVerifyRequest request);
 
+    Optional<PaymentDTO> get(Long id);
+
+    Optional<PaymentDTO> getByAuthority(String authority);
+
+    PaymentVerifyResult verifyCallback(String authority, String status, PaymentGatewayType gatewayType);
 }
