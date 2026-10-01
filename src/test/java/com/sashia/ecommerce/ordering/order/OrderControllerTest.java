@@ -40,7 +40,7 @@ public class OrderControllerTest extends BaseControllerTest {
                     .andDo(print());
         }
 
-        //TODO: Get all the dtos from database not hardcoded !
+        //TODO: Get all the DTOs from database not hardcoded !
         private static CheckoutRequest getRequest() {
             var paymentMethod = new PaymentMethodDTO(1L, null, null, null, null);
 
@@ -49,7 +49,7 @@ public class OrderControllerTest extends BaseControllerTest {
                     new ItemSummaryDTO(2L, null, null, List.of(new ItemVariantDTO(3L, 1, null))),
                     new ItemSummaryDTO(3L, null, null, List.of(new ItemVariantDTO(4L, 1, null)))
             );
-//            80000.00 + 65000.00 + 21000.00(4200.00)
+            //           80000.00 + 65000.00 + 21000.00 (4200.00)
             var itemDelivery = new ItemDeliveryDto(1L, "test address", "taha",
                     "09361629708", "hajivandtaha@gmail.com");
 

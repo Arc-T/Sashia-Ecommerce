@@ -1,12 +1,12 @@
 package com.sashia.ecommerce.ordering.order.internal;
 
 import com.sashia.ecommerce.catalog.item.ItemVariantDTO;
-import com.sashia.ecommerce.ordering.delivery.option.DeliveryOption;
-import com.sashia.ecommerce.ordering.delivery.option.DeliveryOptionRepository;
 import com.sashia.ecommerce.catalog.item.variant.ItemVariant;
 import com.sashia.ecommerce.catalog.item.variant.ItemVariantRepository;
 import com.sashia.ecommerce.identity.user.User;
 import com.sashia.ecommerce.identity.user.UserRepository;
+import com.sashia.ecommerce.ordering.delivery.option.DeliveryOption;
+import com.sashia.ecommerce.ordering.delivery.option.DeliveryOptionRepository;
 import com.sashia.ecommerce.ordering.order.Order;
 import com.sashia.ecommerce.ordering.order.OrderRepository;
 import com.sashia.ecommerce.ordering.order.OrderService;
@@ -43,8 +43,8 @@ public class OrderServiceImpl implements OrderService {
     private final PromotionEngine promotionEngine;
     private final ItemVariantRepository itemVariantRepository;
     private final OrderStatusRepository orderStatusRepository;
-    private final OrderTransactionRepository orderTransactionRepository;
     private final DeliveryOptionRepository deliveryOptionRepository;
+    private final OrderTransactionRepository orderTransactionRepository;
 
     public OrderServiceImpl(UserRepository userRepository, OrderRepository orderRepository, PromotionEngine promotionEngine, ItemVariantRepository itemVariantRepository, OrderStatusRepository orderStatusRepository, OrderTransactionRepository orderTransactionRepository, DeliveryOptionRepository deliveryOptionRepository) {
         this.userRepository = userRepository;
@@ -52,8 +52,8 @@ public class OrderServiceImpl implements OrderService {
         this.promotionEngine = promotionEngine;
         this.itemVariantRepository = itemVariantRepository;
         this.orderStatusRepository = orderStatusRepository;
-        this.orderTransactionRepository = orderTransactionRepository;
         this.deliveryOptionRepository = deliveryOptionRepository;
+        this.orderTransactionRepository = orderTransactionRepository;
     }
 
     @Override
@@ -79,6 +79,10 @@ public class OrderServiceImpl implements OrderService {
 
     /* =============================== RESOLUTION =============================== */
 
+    private Coupon resolveCoupon() {
+        return null; //TODO: full coupon resolution
+    }
+
     private List<ItemVariant> resolveItemVariants(CheckoutRequest request) {
         List<ItemVariant> itemVariants = new ArrayList<>(request.items().size());
 
@@ -99,11 +103,18 @@ public class OrderServiceImpl implements OrderService {
         return itemVariants;
     }
 
-    private Coupon resolveCoupon() {
-        return null; //TODO: full coupon resolution
+    /* =============================== PERSISTENCE SIDE-EFFECTS =============================== */
+
+    private String generateOrderNumber() {
+        return "ORD-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
     }
 
-    /* =============================== PERSISTENCE SIDE-EFFECTS =============================== */
+    private void reserveStock(List<ItemVariant> itemVariants) {
+        for (ItemVariant itemVariant : itemVariants) {
+            itemVariant.setStock(itemVariant.getStock() - itemVariant.getQuantity());
+        }
+        itemVariantRepository.saveAll(itemVariants);
+    }
 
     private void recordStatusTransition(Order order, OrderStatusType type, String description) {
         OrderStatus status = orderStatusRepository.findByType(type)
@@ -117,17 +128,6 @@ public class OrderServiceImpl implements OrderService {
         orderTransactionRepository.save(transaction);
     }
 
-    private void reserveStock(List<ItemVariant> itemVariants) {
-        for (ItemVariant itemVariant : itemVariants) {
-            itemVariant.setStock(itemVariant.getStock() - itemVariant.getQuantity());
-        }
-        itemVariantRepository.saveAll(itemVariants);
-    }
-
-    private String generateOrderNumber() {
-        return "ORD-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
-    }
-
     /* =========================== NOT YET IMPLEMENTED =========================== */
 
     @Override
@@ -136,12 +136,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Page<OrderDTO> getAll(Pageable pageable, OrderSearchDTO search) {
-        return null;
+    public void update(Long id, OrderDTO order) {
     }
 
     @Override
-    public void update(Long id, OrderDTO order) {
+    public Page<OrderDTO> getAll(Pageable pageable, OrderSearchDTO search) {
+        return null;
     }
 
 }
