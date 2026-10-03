@@ -4,7 +4,7 @@ spring:
     name: ASA
 
   config:
-    import: classpath:db/postgresql.yaml, classpath:sms/melipayamak.yml, classpath:bank/zarinpal.yaml
+      import: classpath:db/postgresql.yaml, classpath:sms/melipayamak.yml, classpath:bank/zarinpal.yaml
 
   main:
     lazy-initialization: true

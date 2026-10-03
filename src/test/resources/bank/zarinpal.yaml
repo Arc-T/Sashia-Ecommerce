@@ -1,0 +1,10 @@
+payment:
+  gateways:
+    zarinpal:
+      merchant-id: fccff41a-25f0-4abd-a23f-f1b0fb4c5003
+      request-url: https://sandbox.zarinpal.com/pg/v4/payment/request.json
+      verify-url: https://sandbox.zarinpal.com/pg/v4/payment/verify.json
+      start-pay-url: https://sandbox.zarinpal.com/pg/StartPay/
+      callback-url: http://localhost:8080/payments/callback
+      currency: IRT
+      sandbox: true

@@ -8,7 +8,7 @@ active address id is needed in users table
 ✅ validations are not set
 ✅ removed project lombok
 ✅ fixed authentication and authorization
-
+%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\
 2026-06-07T14:57:07.003+03:30  WARN 8204 --- [ASA] [ionShutdownHook] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'eventPublicationRegistry': org.springframework.beans.factory.BeanCreationNotAllowedException: Error creating bean with name 'transactionManager': Singleton bean creation not allowed while singletons of this factory are in destruction (Do not request a bean from a BeanFactory in a destroy method implementation!)
 
 ⚠ Tests get time elapsed warnings

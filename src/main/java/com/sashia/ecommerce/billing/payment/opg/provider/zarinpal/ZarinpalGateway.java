@@ -8,8 +8,9 @@ import com.sashia.ecommerce.billing.payment.opg.dto.PaymentInitiateResult;
 import com.sashia.ecommerce.billing.payment.opg.dto.PaymentVerifyRequest;
 import com.sashia.ecommerce.billing.payment.opg.dto.PaymentVerifyResult;
 import com.sashia.shared.exception.BusinessRuleException;
-import lombok.RequiredArgsConstructor;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
@@ -17,19 +18,25 @@ import org.springframework.web.client.RestClient;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Zarinpal payment gateway strategy.
- * <p>
- * Only provider-specific HTTP mapping lives here; logging / validation /
- * timing are inherited from {@link AbstractPaymentGateway}.
- */
+@Getter
+@Setter
 @Component
-@RequiredArgsConstructor
-@EnableConfigurationProperties(ZarinpalProperties.class)
+@ConfigurationProperties(prefix = "payment.gateways.zarinpal")
 public class ZarinpalGateway extends AbstractPaymentGateway {
 
-    private final ZarinpalProperties properties;
-    private final RestClient restClient = RestClient.builder().build();
+    private String merchantId;
+    private String requestUrl;
+    private String verifyUrl;
+    private String startPayUrl;
+    private String callbackUrl;
+    private String currency;
+    private boolean sandbox;
+
+    private final RestClient restClient;
+
+    public ZarinpalGateway(RestClient.Builder restClientBuilder) {
+        this.restClient = restClientBuilder.build();
+    }
 
     @Override
     public PaymentGatewayType type() {
@@ -41,7 +48,7 @@ public class ZarinpalGateway extends AbstractPaymentGateway {
         ZarinpalRequest body = toRequestBody(request);
 
         ZarinpalResponse response = restClient.post()
-                .uri(properties.getRequestUrl())
+                .uri(requestUrl)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(body)
                 .retrieve()
@@ -53,7 +60,7 @@ public class ZarinpalGateway extends AbstractPaymentGateway {
         }
 
         ZarinpalResponse.Data data = response.data();
-        String redirectUrl = properties.getStartPayUrl() + data.authority();
+        String redirectUrl = startPayUrl + data.authority();
 
         return new PaymentInitiateResult(
                 type(),
@@ -67,13 +74,13 @@ public class ZarinpalGateway extends AbstractPaymentGateway {
     @Override
     protected PaymentVerifyResult doVerify(PaymentVerifyRequest request) {
         Map<String, Object> body = Map.of(
-                "merchant_id", properties.getMerchantId(),
+                "merchant_id", merchantId,
                 "amount", request.amount().intValue(),
                 "authority", request.authority()
         );
 
         ZarinpalResponse response = restClient.post()
-                .uri(properties.getVerifyUrl())
+                .uri(verifyUrl)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(body)
                 .retrieve()
@@ -84,7 +91,6 @@ public class ZarinpalGateway extends AbstractPaymentGateway {
         }
 
         ZarinpalResponse.Data data = response.data();
-        // Zarinpal: 100 = first verify success, 101 = already verified
         boolean paid = data.code() != null && (data.code() == 100 || data.code() == 101);
 
         return new PaymentVerifyResult(
@@ -109,12 +115,12 @@ public class ZarinpalGateway extends AbstractPaymentGateway {
 
         String callback = request.callbackUrl() != null && !request.callbackUrl().isBlank()
                 ? request.callbackUrl()
-                : properties.getCallbackUrl();
+                : callbackUrl;
 
         return new ZarinpalRequest(
-                properties.getMerchantId(),
+                merchantId,
                 request.amount().intValue(),
-                properties.getCurrency(),
+                currency,
                 request.description() != null ? request.description() : "Order " + request.orderId(),
                 callback,
                 null,
