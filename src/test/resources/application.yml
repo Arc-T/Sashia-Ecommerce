@@ -7,7 +7,7 @@ spring:
       enabled: true
 
   config:
-      import: classpath:bank/zarinpal.yaml
+    import: classpath:bank/zarinpal.yaml
 
   datasource:
     url: jdbc:h2:mem:test_db;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
@@ -72,4 +72,8 @@ logging:
     com.zaxxer.hikari.HikariConfig: debug
 
   charset:
-      console: UTF-8
+    console: UTF-8
+
+sashia:
+  media:
+    root: ${java.io.tmpdir}/sashia-media-test

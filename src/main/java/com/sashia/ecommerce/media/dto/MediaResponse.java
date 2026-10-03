@@ -1,9 +1,26 @@
 package com.sashia.ecommerce.media.dto;
 
-public record MediaResponse(String url, String extension) {
+import com.sashia.ecommerce.media.MediaResourceType;
+import com.sashia.ecommerce.media.MediaStatus;
 
-    public MediaResponse(String url) {
-        this(url, null);
-    }
+import java.time.LocalDateTime;
 
+public record MediaResponse(
+        Long id,
+        String url,
+        String fileName,
+        String mimeType,
+        String extension,
+        MediaTypeEnum type,
+        Long size,
+        Integer width,
+        Integer height,
+        MediaStatus status,
+        MediaResourceType resourceType,
+        Long resourceId,
+        Integer displayOrder,
+        String description,
+        LocalDateTime createdAt,
+        LocalDateTime updatedAt
+) {
 }

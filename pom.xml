@@ -121,11 +121,11 @@
         </dependency>
 
         <!--##################### BOOT UI #####################-->
-        <dependency>
-            <groupId>com.julien-dubois.bootui</groupId>
-            <artifactId>bootui-spring-boot-starter</artifactId>
-            <version>1.5.2</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.julien-dubois.bootui</groupId>-->
+<!--            <artifactId>bootui-spring-boot-starter</artifactId>-->
+<!--            <version>1.5.2</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
