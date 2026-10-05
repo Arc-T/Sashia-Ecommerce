@@ -8,7 +8,7 @@ import java.util.List;
 public record ProductBriefInfoProjection(
         long id,
         String name,
-        String media,
+//        String media,
         int quantity,
         ProductPriceDTO price
 ) {
@@ -22,7 +22,7 @@ public record ProductBriefInfoProjection(
                 productBriefInfoProjections.add(new ProductBriefInfoProjection(
                         products.get(i).id(),
                         products.get(i).name(),
-                        products.get(i).media().stream().findFirst().get().url(),
+//                        products.get(i).media().stream().findFirst().get().url(),
                         products.get(i).stock(),
                         productPrices.get(i)
                 ));

@@ -13,5 +13,6 @@ databaseChangeLog:
               - column: { name: phone, value: '361629708' }
               - column: { name: password, value: '$2a$12$L/OwMC1/4iAtR06GmKbvbOjisk6MbtTM8kex5PrGjuyQOxNv06akm' }
               - column: { name: user_group_id, valueNumeric: '1' }
+              - column: { name: vip_group_id, valueNumeric: '1' }
               - column: { name: gender, value: 'MALE' }
               - column: { name: description, value: 'A passionate tech enthusiast and entrepreneur.' }

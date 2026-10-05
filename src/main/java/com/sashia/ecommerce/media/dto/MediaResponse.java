@@ -11,7 +11,7 @@ public record MediaResponse(
         String fileName,
         String mimeType,
         String extension,
-        MediaTypeEnum type,
+//        MediaTypeEnum type,
         Long size,
         Integer width,
         Integer height,

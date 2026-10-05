@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1791224400340-1
+      author: Mr.Arc-T
+      changes:
+        - insert:
+            schemaName: identity
+            tableName: vip_groups
+            columns:
+              - column: { name: name, value: 'عادی' }
+              - column: { name: description, value: 'پیشفرض برای کاربران' }

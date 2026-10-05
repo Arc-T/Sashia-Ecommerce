@@ -3,12 +3,16 @@ package com.sashia.ecommerce.identity.authentication;
 import com.sashia.ecommerce.identity.authentication.internal.Role;
 import com.sashia.ecommerce.identity.user.User;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "user_groups", schema = "identity")
 public class UserGroup {
@@ -30,6 +34,7 @@ public class UserGroup {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
+            schema = "identity",
             name = "user_group_roles",
             joinColumns = @JoinColumn(name = "user_group_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
@@ -37,45 +42,5 @@ public class UserGroup {
     private Set<Role> roles;
 
     /* **************************** GETTER & SETTERS **********************************/
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public Set<User> getAuthUsers() {
-        return authUsers;
-    }
-
-    public void setAuthUsers(Set<User> authUsers) {
-        this.authUsers = authUsers;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
 
 }

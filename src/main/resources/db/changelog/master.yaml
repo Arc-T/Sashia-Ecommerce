@@ -13,13 +13,13 @@ databaseChangeLog:
   - include:
       file: db/changelog/changes/identity/role/permission/001-create-table.yaml
   - include:
+      file: db/changelog/changes/identity/vip/group/001-create-table.yaml
+  - include:
       file: db/changelog/changes/identity/user/group/001-create-table.yaml
   - include:
       file: db/changelog/changes/identity/user/001-create-table.yaml
   - include:
       file: db/changelog/changes/identity/user/group/role/001-create-table.yaml
-  - include:
-      file: db/changelog/changes/identity/vip/group/001-create-table.yaml
   - include:
       file: db/changelog/changes/identity/vip/membership/001-create-table.yaml
   - include:
@@ -119,6 +119,16 @@ databaseChangeLog:
   ######################################## DATA ##########################################
   - include:
       file: db/changelog/changes/identity/user/group/001-insert-data.yaml
+  - include:
+      file: db/changelog/changes/identity/permission/001-insert-data.yaml
+  - include:
+      file: db/changelog/changes/identity/role/001-insert-data.yaml
+  - include:
+      file: db/changelog/changes/identity/role/permission/001-insert-data.yaml
+  - include:
+      file: db/changelog/changes/identity/user/group/role/001-insert-data.yaml
+  - include:
+      file: db/changelog/changes/identity/vip/group/001-insert-data.yaml
   - include:
       file: db/changelog/changes/identity/user/001-insert-data.yaml
   - include:

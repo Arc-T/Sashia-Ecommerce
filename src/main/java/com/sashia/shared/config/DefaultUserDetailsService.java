@@ -45,7 +45,7 @@ public class DefaultUserDetailsService implements UserDetailsService {
     private Collection<? extends GrantedAuthority> getAuthorities(UserGroup userGroup) {
         return userGroup.getRoles()
                 .stream()
-                .flatMap(role -> role.permissions().stream())
+                .flatMap(role -> role.getPermissions().stream())
                 .map(permission -> new SimpleGrantedAuthority(permission.name()))
                 .toList();
     }
