@@ -3,7 +3,7 @@ package com.sashia.ecommerce.catalog.item.internal;
 import com.sashia.ecommerce.catalog.item.ItemMapper;
 import com.sashia.ecommerce.catalog.item.ItemRepository;
 import com.sashia.ecommerce.catalog.item.ItemService;
-import com.sashia.ecommerce.catalog.item.dto.ItemSummaryDTO;
+import com.sashia.ecommerce.catalog.item.dto.ItemSummaryResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -22,13 +22,13 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Page<ItemSummaryDTO> getAll(Pageable pageable) {
+    public Page<ItemSummaryResponse> getAll(Pageable pageable) {
         return null;
     }
 
     @Override
-    public Optional<ItemSummaryDTO> get(Long id) {
-        return itemRepository.findById(id).map(ItemMapper::toDTO);
+    public Optional<ItemSummaryResponse> get(Long id) {
+        return itemRepository.findById(id).map(ItemMapper::toResponse);
     }
 
 }

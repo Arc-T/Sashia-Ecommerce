@@ -74,8 +74,8 @@ public class MediaServiceImpl implements MediaService {
 
         List<Media> created = new ArrayList<>(files.length);
         for (int i = 0; i < files.length; i++) {
-            MediaFormat format = inspections.get(i).format();
-            String slug = UUID.randomUUID() + "." + format.extension();
+            MediaInspector.Inspection info = inspections.get(i);
+            String slug = UUID.randomUUID() + "." + info.extension();
             String key = storageKey(slug);
 
             MediaStorage.StoredFile stored;
@@ -92,8 +92,8 @@ public class MediaServiceImpl implements MediaService {
             media.setOriginalName(sanitizeName(files[i].getOriginalFilename()));
             media.setChecksum(stored.sha256());
             media.setSize(stored.size());
-            media.setMimeType(format.mimeType());
-            media.setExtension(format.extension());
+            media.setMimeType(info.mimeType());
+            media.setExtension(info.extension());
             media.setMetadata(inspections.get(i).metadata());
             media.setStatus(MediaStatus.DRAFT);
             media.setOwnerId(ownerId);

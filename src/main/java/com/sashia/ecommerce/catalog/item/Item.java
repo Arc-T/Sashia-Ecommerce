@@ -5,6 +5,8 @@ import com.sashia.ecommerce.catalog.item.dto.ItemType;
 import com.sashia.ecommerce.catalog.item.variant.ItemVariant;
 import com.sashia.ecommerce.catalog.tag.Tag;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SoftDelete;
 import org.hibernate.annotations.SoftDeleteType;
@@ -14,6 +16,8 @@ import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "items", schema = "catalog")
 public class Item {
@@ -63,86 +67,12 @@ public class Item {
         return itemVariants.stream().findFirst().orElse(null);
     }
 
+    @Transient
+    public void addItemVariant(ItemVariant variant) {
+        variant.setItem(this);
+        itemVariants.add(variant);
+    }
+
     /* ****************************** GETTER & SETTERS ******************************** */
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public ItemType getItemType() {
-        return itemType;
-    }
-
-    public void setItemType(ItemType itemType) {
-        this.itemType = itemType;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public boolean isFeatured() {
-        return isFeatured;
-    }
-
-    public void setFeatured(boolean featured) {
-        isFeatured = featured;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public Set<Tag> getTags() {
-        return tags;
-    }
-
-    public void setTags(Set<Tag> tags) {
-        this.tags = tags;
-    }
-
-    public Set<ItemVariant> getItemVariants() {
-        return itemVariants;
-    }
-
-    public void setItemVariants(Set<ItemVariant> itemVariants) {
-        this.itemVariants = itemVariants;
-    }
 
 }

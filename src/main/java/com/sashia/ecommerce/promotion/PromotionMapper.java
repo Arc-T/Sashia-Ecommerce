@@ -1,12 +1,12 @@
 package com.sashia.ecommerce.promotion;
 
-import com.sashia.ecommerce.catalog.item.dto.AppliedPromotionDTO;
+import com.sashia.ecommerce.catalog.item.dto.AppliedPromotionResponse;
 import com.sashia.ecommerce.promotion.engine.dto.AppliedPromotion;
 
 public class PromotionMapper {
 
-    public static AppliedPromotionDTO toDTO(AppliedPromotion appliedPromotion) {
-        return new AppliedPromotionDTO(
+    public static AppliedPromotionResponse toDTO(AppliedPromotion appliedPromotion) {
+        return new AppliedPromotionResponse(
                 appliedPromotion.promotion().getId(),
                 appliedPromotion.promotion().getName(),
                 appliedPromotion.promotion().getValidFrom(),

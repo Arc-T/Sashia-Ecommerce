@@ -1,16 +1,14 @@
 package com.sashia.ecommerce.catalog.product.dto;
 
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import org.jspecify.annotations.Nullable;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 
-public record ProductCreateRequest(
+public record ProductUpdateRequest(
         @NotBlank(message = "{product.title.required}")
         String title,
         @NotNull(message = "{category.id.required}")
@@ -18,9 +16,9 @@ public record ProductCreateRequest(
         String description,
         boolean featured,
         @Nullable Set<Long> tagIds,
-        @NotEmpty(message = "{product.variants.required}") @Valid
-        List<ProductVariantRequest> variants,
-        /* draft media ids uploaded before the product existed. null = no media */
+        @NotEmpty(message = "{product.variants.required}")
+        @Valid List<ProductVariantRequest> variants,
+        /* null = leave media untouched, [] = remove all, otherwise the exact ordered list */
         @Nullable @Size(max = 50) List<Long> mediaIds
 ) {
 }

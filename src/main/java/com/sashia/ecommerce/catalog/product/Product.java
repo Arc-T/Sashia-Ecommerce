@@ -2,7 +2,11 @@ package com.sashia.ecommerce.catalog.product;
 
 import com.sashia.ecommerce.catalog.item.Item;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "products", schema = "catalog")
 public class Product {
@@ -27,29 +31,5 @@ public class Product {
 //    private Set<ProductComments> comments = new HashSet<>();
 
     /* ****************************** GETTER & SETTERS ******************************** */
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
 }

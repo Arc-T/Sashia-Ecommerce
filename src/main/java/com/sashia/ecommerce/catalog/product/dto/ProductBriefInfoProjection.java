@@ -13,7 +13,7 @@ public record ProductBriefInfoProjection(
         ProductPriceDTO price
 ) {
 
-    public static List<ProductBriefInfoProjection> toListDTO(List<ProductDTO> products, List<ProductPriceDTO> productPrices) {
+    public static List<ProductBriefInfoProjection> toListDTO(List<ProductResponse> products, List<ProductPriceDTO> productPrices) {
         if (!CollectionUtils.isEmpty(products) &&
                 !CollectionUtils.isEmpty(productPrices) &&
                 products.size() == productPrices.size()) {

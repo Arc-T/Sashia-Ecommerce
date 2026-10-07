@@ -1,0 +1,6 @@
+DB:
+  NAME: PostgreSQL
+  URL: jdbc:postgresql://localhost:5432/sashia
+  DRIVER: org.postgresql.Driver
+  USERNAME: root
+  PASSWORD: 1234

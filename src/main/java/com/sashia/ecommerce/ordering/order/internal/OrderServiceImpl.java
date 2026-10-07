@@ -1,6 +1,6 @@
 package com.sashia.ecommerce.ordering.order.internal;
 
-import com.sashia.ecommerce.catalog.item.ItemVariantDTO;
+import com.sashia.ecommerce.catalog.item.ItemVariantResponse;
 import com.sashia.ecommerce.catalog.item.variant.ItemVariant;
 import com.sashia.ecommerce.catalog.item.variant.ItemVariantRepository;
 import com.sashia.ecommerce.identity.user.User;
@@ -98,7 +98,7 @@ public class OrderServiceImpl implements OrderService {
         List<ItemVariant> itemVariants = new ArrayList<>(request.items().size());
 
         for (var cartItem : request.items()) {
-            ItemVariantDTO cartItemVariant = cartItem.itemVariants().getFirst();
+            ItemVariantResponse cartItemVariant = cartItem.itemVariants().getFirst();
 
             ItemVariant itemVariant = itemVariantRepository
                     .findByIdAndItemIdForUpdate(cartItemVariant.id(), cartItem.id())

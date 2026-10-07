@@ -1,14 +1,14 @@
 package com.sashia.ecommerce.catalog.item;
 
-import com.sashia.ecommerce.catalog.item.dto.ItemSummaryDTO;
-import com.sashia.ecommerce.catalog.item.dto.PriceableDTO;
+import com.sashia.ecommerce.catalog.item.dto.ItemSummaryResponse;
+import com.sashia.ecommerce.catalog.item.dto.PriceResponse;
 import com.sashia.ecommerce.catalog.item.variant.ItemVariant;
 import com.sashia.ecommerce.promotion.PromotionMapper;
 
 public class ItemMapper {
 
-    public static ItemSummaryDTO toDTO(Item item) {
-        return new ItemSummaryDTO(
+    public static ItemSummaryResponse toResponse(Item item) {
+        return new ItemSummaryResponse(
                 item.getId(),
                 item.getTitle(),
                 item.getCategory().getId(),
@@ -20,11 +20,11 @@ public class ItemMapper {
         );
     }
 
-    private static ItemVariantDTO toItemVariantDTO(ItemVariant itemVariant) {
-        return new ItemVariantDTO(
+    private static ItemVariantResponse toItemVariantDTO(ItemVariant itemVariant) {
+        return new ItemVariantResponse(
                 itemVariant.getId(),
                 itemVariant.getStock(),
-                new PriceableDTO(
+                new PriceResponse(
                         itemVariant.getUnitPrice(),
                         itemVariant.calculateSubTotal(),
                         itemVariant.calculateTotalDiscountAmount(),

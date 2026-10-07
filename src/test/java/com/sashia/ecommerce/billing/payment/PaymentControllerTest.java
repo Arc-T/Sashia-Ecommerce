@@ -6,8 +6,8 @@ import com.sashia.ecommerce.billing.payment.opg.PaymentGateway;
 import com.sashia.ecommerce.billing.payment.opg.PaymentGatewayRegistry;
 import com.sashia.ecommerce.billing.payment.opg.PaymentGatewayType;
 import com.sashia.ecommerce.billing.payment.opg.dto.*;
-import com.sashia.ecommerce.catalog.item.ItemVariantDTO;
-import com.sashia.ecommerce.catalog.item.dto.ItemSummaryDTO;
+import com.sashia.ecommerce.catalog.item.ItemVariantResponse;
+import com.sashia.ecommerce.catalog.item.dto.ItemSummaryResponse;
 import com.sashia.ecommerce.ordering.order.OrderService;
 import com.sashia.ecommerce.ordering.order.dto.CheckoutRequest;
 import com.sashia.ecommerce.ordering.order.dto.ItemDeliveryDto;
@@ -341,9 +341,9 @@ class PaymentControllerTest extends BaseControllerTest {
     private static CheckoutRequest checkoutRequest() {
         var paymentMethod = new PaymentMethodDTO(1L, null, null, null, null);
         var items = List.of(
-                new ItemSummaryDTO(1L, null, null, List.of(new ItemVariantDTO(2L, 1, null))),
-                new ItemSummaryDTO(2L, null, null, List.of(new ItemVariantDTO(3L, 1, null))),
-                new ItemSummaryDTO(3L, null, null, List.of(new ItemVariantDTO(4L, 1, null)))
+                new ItemSummaryResponse(1L, null, null, List.of(new ItemVariantResponse(2L, 1, null))),
+                new ItemSummaryResponse(2L, null, null, List.of(new ItemVariantResponse(3L, 1, null))),
+                new ItemSummaryResponse(3L, null, null, List.of(new ItemVariantResponse(4L, 1, null)))
         );
         var delivery = new ItemDeliveryDto(1L, "test address", "taha",
                 "09361629708", "hajivandtaha@gmail.com");

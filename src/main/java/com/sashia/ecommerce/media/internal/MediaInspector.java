@@ -1,6 +1,7 @@
 package com.sashia.ecommerce.media.internal;
 
 import com.sashia.shared.exception.InvalidResourceException;
+import org.apache.tika.Tika;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -10,7 +11,6 @@ import javax.imageio.stream.ImageInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -19,7 +19,18 @@ import java.util.Map;
 @Component
 class MediaInspector {
 
-    record Inspection(MediaFormat format, Map<String, Object> metadata) {
+    private static final Tika TIKA = new Tika();
+
+    /**
+     * Allowed content types and the extension we store them with.
+     */
+    private static final Map<String, String> ALLOWED = Map.of(
+            "image/jpeg", "jpg",
+            "image/png", "png",
+            "image/gif", "gif",
+            "image/webp", "webp");
+
+    record Inspection(String mimeType, String extension, Map<String, Object> metadata) {
     }
 
     private final MediaProperties properties;
@@ -31,41 +42,32 @@ class MediaInspector {
     Inspection inspect(MultipartFile file) {
         if (file == null || file.isEmpty())
             throw new InvalidResourceException("media.file.empty");
-
         if (file.getSize() > properties.maxFileSize().toBytes())
             throw new InvalidResourceException("media.file.too.large");
 
-        MediaFormat format = detectFormat(file);
-        Map<String, Object> metadata = new LinkedHashMap<>();
-
-        if (format.inspectable())
-            readDimensions(file, metadata);
-
-        return new Inspection(format, metadata.isEmpty() ? null : metadata);
-    }
-
-    // =============================== HELPERS ===============================
-
-    private MediaFormat detectFormat(MultipartFile file) {
-        byte[] header = new byte[MediaFormat.HEADER_SIZE];
-        int read;
         try (InputStream in = file.getInputStream()) {
-            read = in.readNBytes(header, 0, header.length);
+            // Tika looks at the bytes only: the client's name and content type are never used.
+            String mimeType = TIKA.detect(in);
+            String extension = ALLOWED.get(mimeType);
+            if (extension == null)
+                throw new InvalidResourceException("media.type.unsupported");
+
+            return new Inspection(mimeType, extension, readDimensions(file));
         } catch (IOException e) {
             throw new InvalidResourceException("media.file.corrupted");
         }
-        return MediaFormat.detect(header, read)
-                .orElseThrow(() -> new InvalidResourceException("media.type.unsupported"));
     }
 
-    /** Reads only the header of the image (no pixel decoding), so it is cheap and safe against bombs. */
-    private void readDimensions(MultipartFile file, Map<String, Object> metadata) {
+    /**
+     * Header only, no pixel decoding. WebP has no JDK reader, so it returns null.
+     */
+    private Map<String, Object> readDimensions(MultipartFile file) throws IOException {
         try (InputStream in = file.getInputStream();
              ImageInputStream iis = ImageIO.createImageInputStream(in)) {
 
             Iterator<ImageReader> readers = ImageIO.getImageReaders(iis);
             if (!readers.hasNext())
-                throw new InvalidResourceException("media.file.corrupted");
+                return null;
 
             ImageReader reader = readers.next();
             try {
@@ -78,16 +80,10 @@ class MediaInspector {
                 if ((long) width * height > properties.maxPixels())
                     throw new InvalidResourceException("media.image.too.large");
 
-                metadata.put("width", width);
-                metadata.put("height", height);
+                return Map.of("width", width, "height", height);
             } finally {
                 reader.dispose();
             }
-        } catch (IOException | RuntimeException e) {
-            if (e instanceof InvalidResourceException invalid)
-                throw invalid;
-            throw new InvalidResourceException("media.file.corrupted");
         }
     }
-
 }

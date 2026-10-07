@@ -1,8 +1,8 @@
 package com.sashia.ecommerce.ordering.order;
 
 import com.sashia.ecommerce.billing.payment.dto.PaymentMethodDTO;
-import com.sashia.ecommerce.catalog.item.ItemVariantDTO;
-import com.sashia.ecommerce.catalog.item.dto.ItemSummaryDTO;
+import com.sashia.ecommerce.catalog.item.ItemVariantResponse;
+import com.sashia.ecommerce.catalog.item.dto.ItemSummaryResponse;
 import com.sashia.ecommerce.ordering.order.dto.CheckoutRequest;
 import com.sashia.ecommerce.ordering.order.dto.ItemDeliveryDto;
 import com.sashia.shared.BaseControllerTest;
@@ -106,9 +106,9 @@ class OrderControllerTest extends BaseControllerTest {
         void shouldReturnNotFound_whenItemVariantDoesNotExist(Language language) throws Exception {
             CheckoutRequest request = new CheckoutRequest(
                     null, null, delivery(),
-                    List.of(new ItemSummaryDTO(
+                    List.of(new ItemSummaryResponse(
                             NON_EXISTENT_ITEM_ID, null, null,
-                            List.of(new ItemVariantDTO(NON_EXISTENT_VARIANT_ID, 1, null)))),
+                            List.of(new ItemVariantResponse(NON_EXISTENT_VARIANT_ID, 1, null)))),
                     paymentMethod(), TOTAL_PRICE);
 
             mockMvc().perform(post(BASE_URL)
@@ -127,9 +127,9 @@ class OrderControllerTest extends BaseControllerTest {
             // Variant 3 stock = 1; request qty 2
             CheckoutRequest request = new CheckoutRequest(
                     null, null, delivery(),
-                    List.of(new ItemSummaryDTO(
+                    List.of(new ItemSummaryResponse(
                             ITEM_2_ID, null, null,
-                            List.of(new ItemVariantDTO(VARIANT_3_ID, 2, null)))),
+                            List.of(new ItemVariantResponse(VARIANT_3_ID, 2, null)))),
                     paymentMethod(), BigDecimal.valueOf(65000.00));
 
             mockMvc().perform(post(BASE_URL)
@@ -245,14 +245,14 @@ class OrderControllerTest extends BaseControllerTest {
         return new PaymentMethodDTO(1L, null, null, null, null);
     }
 
-    private static List<ItemSummaryDTO> validItems() {
+    private static List<ItemSummaryResponse> validItems() {
         return List.of(
-                new ItemSummaryDTO(ITEM_1_ID, null, null,
-                        List.of(new ItemVariantDTO(VARIANT_2_ID, 1, null))),
-                new ItemSummaryDTO(ITEM_2_ID, null, null,
-                        List.of(new ItemVariantDTO(VARIANT_3_ID, 1, null))),
-                new ItemSummaryDTO(ITEM_3_ID, null, null,
-                        List.of(new ItemVariantDTO(VARIANT_4_ID, 1, null)))
+                new ItemSummaryResponse(ITEM_1_ID, null, null,
+                        List.of(new ItemVariantResponse(VARIANT_2_ID, 1, null))),
+                new ItemSummaryResponse(ITEM_2_ID, null, null,
+                        List.of(new ItemVariantResponse(VARIANT_3_ID, 1, null))),
+                new ItemSummaryResponse(ITEM_3_ID, null, null,
+                        List.of(new ItemVariantResponse(VARIANT_4_ID, 1, null)))
         );
     }
 

@@ -1,12 +1,12 @@
 package com.sashia.ecommerce.catalog.product.internal;
 
-import com.sashia.ecommerce.catalog.item.dto.ItemSummaryDTO;
+import com.sashia.ecommerce.catalog.item.dto.ItemSummaryResponse;
 import com.sashia.ecommerce.catalog.item.internal.ProductSearchRequest;
 import com.sashia.ecommerce.catalog.product.ProductService;
 import com.sashia.ecommerce.catalog.product.dto.ProductBriefInfoProjection;
 import com.sashia.ecommerce.catalog.product.dto.ProductCreateRequest;
-import com.sashia.ecommerce.catalog.product.dto.ProductDTO;
-import com.sashia.ecommerce.catalog.product.dto.ProductUpdateDTO;
+import com.sashia.ecommerce.catalog.product.dto.ProductResponse;
+import com.sashia.ecommerce.catalog.product.dto.ProductUpdateRequest;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,41 +26,35 @@ class ProductController {
         this.productService = productService;
     }
 
-    @PostMapping
-    @PreAuthorize("hasAuthority('CREATE_PRODUCT')")
-    ResponseEntity<ProductDTO> create(ProductCreateRequest product) {
-        return ResponseEntity.created(URI.create("/products/" + productService.create(product)))
-                .build();
+    @GetMapping
+    @PreAuthorize("hasAuthority('READ_ALL_PRODUCTS')")
+    ResponseEntity<Page<ItemSummaryResponse>> readAll(Pageable pageable, ProductSearchRequest search) {
+        return ResponseEntity.ok(productService.readAll(pageable, search));
     }
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('READ_PRODUCT')")
-    ResponseEntity<ProductDTO> read(@PathVariable Long id) {
-        return ResponseEntity.of(productService.get(id));
+    ResponseEntity<ProductResponse> read(@PathVariable Long id) {
+        return ResponseEntity.of(productService.read(id));
     }
 
-    @GetMapping
-    @PreAuthorize("hasAuthority('READ_ALL_PRODUCTS')")
-    ResponseEntity<Page<ItemSummaryDTO>> readAll(Pageable pageable, ProductSearchRequest search) {
-        return ResponseEntity.ok(productService.getAll(pageable, search));
+    @PostMapping
+    @PreAuthorize("hasAuthority('CREATE_PRODUCT')")
+    ResponseEntity<Void> create(@RequestBody @Valid ProductCreateRequest request) {
+        return ResponseEntity.created(URI.create("/products/" + productService.create(request))).build();
     }
 
-    @GetMapping("/brief")
-    ResponseEntity<Page<ProductBriefInfoProjection>> readAllBrief(Pageable pageable, ProductSearchRequest search) {
-        return ResponseEntity.ok(productService.getAllBriefInfo(pageable, search));
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('UPDATE_PRODUCT')")
+    ResponseEntity<Void> update(@PathVariable Long id, @RequestBody @Valid ProductUpdateRequest request) {
+        productService.update(id, request);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('DELETE_PRODUCT')")
-    ResponseEntity<?> delete(@PathVariable Long id) {
+    ResponseEntity<Void> delete(@PathVariable Long id) {
         productService.delete(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @PutMapping(path = "/{id}")
-    @PreAuthorize("hasAuthority('UPDATE_PRODUCT')")
-    ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody ProductUpdateDTO product) {
-        productService.edit(id, product);
         return ResponseEntity.noContent().build();
     }
 
