@@ -52,11 +52,16 @@ class AttributeControllerTest extends BaseControllerTest {
         @DisplayName("Should return all attributes with status 200")
         void shouldReturnAllAttributes() throws Exception {
             mockMvc().perform(get(BASE_URL)
+                            .param("sort", "id,desc")
                             .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.content").isArray())
                     .andExpect(jsonPath("$.content.length()").value(9))
-                    .andExpect(jsonPath("$.page.totalElements").value(9));
+                    .andExpect(jsonPath("$.page.totalElements").value(9))
+                    .andExpect(jsonPath("$.content[0].id").value(9))
+                    .andExpect(jsonPath("$.content[1].id").value(8))
+                    .andExpect(jsonPath("$.content[8].id").value(1))
+                    .andDo(print());
         }
 
         @Test

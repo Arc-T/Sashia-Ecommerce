@@ -6,6 +6,7 @@ import com.sashia.ecommerce.catalog.attribute.dto.AttributeResponse;
 import com.sashia.ecommerce.catalog.attribute.dto.AttributeUpdateRequest;
 import com.sashia.ecommerce.catalog.category.Category;
 import com.sashia.ecommerce.catalog.category.internal.CategoryMapper;
+import org.springframework.util.CollectionUtils;
 
 import java.util.stream.Collectors;
 
@@ -25,7 +26,7 @@ public final class AttributeMapper {
                 attribute.getCreatedAt(),
                 attribute.getUpdatedAt(),
                 CategoryMapper.toDTO(attribute.getCategory()),
-                attribute.getAttributeValues()
+                CollectionUtils.isEmpty(attribute.getAttributeValues()) ? null : attribute.getAttributeValues()
                         .stream().map(AttributeValueMapper::toDTO).collect(Collectors.toUnmodifiableSet())
         );
     }

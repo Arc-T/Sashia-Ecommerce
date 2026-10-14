@@ -72,7 +72,7 @@ public final class ProductMapper {
                 item.isFeatured(),
                 product.getDescription(),
                 item.getTags().stream().map(Tag::getId).collect(Collectors.toCollection(LinkedHashSet::new)),
-                item.getItemVariants().stream().map(ItemMapper::toVariantResponse).toList(),
+                item.getItemVariants().stream().map(ItemMapper::toItemVariantDTO).toList(),
                 media,
                 item.getCreatedAt(),
                 item.getUpdatedAt()
@@ -88,8 +88,8 @@ public final class ProductMapper {
     }
 
     private static void apply(ItemVariant variant, ProductVariantRequest request) {
-        variant.setUnitPrice(request.unitPrice());
-        variant.setCurrency(request.currency());
+//        variant.set(request.unitPrice());
+//        variant.setCurrency(request.currency());
         variant.setStock(request.stock());
         variant.setStatus(request.stock() > 0 ? ItemVariantStatusCode.MARKETABLE : ItemVariantStatusCode.OUT_OF_STOCK);
     }

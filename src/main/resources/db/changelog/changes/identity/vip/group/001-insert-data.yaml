@@ -7,5 +7,4 @@ databaseChangeLog:
             schemaName: identity
             tableName: vip_groups
             columns:
-              - column: { name: name, value: 'عادی' }
-              - column: { name: description, value: 'پیشفرض برای کاربران' }
+              - column: { name: name, value: 'NORMAL' }

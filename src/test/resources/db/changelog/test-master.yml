@@ -15,11 +15,11 @@ databaseChangeLog:
   - include:
       file: db/changelog/changes/catalog/category/001-insert-data.yaml
   - include:
+      file: db/changelog/changes/catalog/attribute/insert-data.yaml
+  - include:
       file: db/changelog/changes/catalog/item/001-insert-data.yaml
   - include:
       file: db/changelog/changes/catalog/item/variant/001-insert-data.yaml
-  - include:
-      file: db/changelog/changes/identity/vip/group/001-insert-data.yaml
   - include:
       file: db/changelog/changes/identity/vip/membership/001-insert-data.yaml
   - include:

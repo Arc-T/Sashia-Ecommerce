@@ -2,12 +2,16 @@ package com.sashia.ecommerce.catalog.attribute.internal;
 
 import com.sashia.ecommerce.catalog.attribute.Attribute;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
 @Entity
-@Table(name = "attribute_values")
+@Table(name = "attribute_values", schema = "catalog")
 public class AttributeValue {
 
     @Id
@@ -28,45 +32,5 @@ public class AttributeValue {
     private Attribute attribute;
 
     /* ****************************** GETTER & SETTERS ******************************** */
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getAttributeId() {
-        return attributeId;
-    }
-
-    public void setAttributeId(Long attributeId) {
-        this.attributeId = attributeId;
-    }
-
-    public String getAttributeValue() {
-        return attributeValue;
-    }
-
-    public void setAttributeValue(String value) {
-        this.attributeValue = value;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Attribute getAttribute() {
-        return attribute;
-    }
-
-    public void setAttribute(Attribute attribute) {
-        this.attribute = attribute;
-    }
 
 }

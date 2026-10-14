@@ -21,9 +21,10 @@ public record ProductBriefInfoProjection(
             for (int i = 0; i < products.size(); i++) {
                 productBriefInfoProjections.add(new ProductBriefInfoProjection(
                         products.get(i).id(),
-                        products.get(i).name(),
+                        products.get(i).title(),
 //                        products.get(i).media().stream().findFirst().get().url(),
-                        products.get(i).stock(),
+                        23,
+//                        products.get(i).stock(),
                         productPrices.get(i)
                 ));
             }

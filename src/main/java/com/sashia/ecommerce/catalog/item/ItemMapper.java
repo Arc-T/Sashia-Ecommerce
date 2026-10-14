@@ -20,7 +20,7 @@ public class ItemMapper {
         );
     }
 
-    private static ItemVariantResponse toItemVariantDTO(ItemVariant itemVariant) {
+    public static ItemVariantResponse toItemVariantDTO(ItemVariant itemVariant) {
         return new ItemVariantResponse(
                 itemVariant.getId(),
                 itemVariant.getStock(),
