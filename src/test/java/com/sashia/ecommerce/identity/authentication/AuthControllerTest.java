@@ -34,7 +34,7 @@ class AuthControllerTest extends BaseControllerTest {
 
             mockMvc().perform(post(BASE_URL)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.token").exists())
                     .andDo(print());
@@ -52,7 +52,7 @@ class AuthControllerTest extends BaseControllerTest {
             mockMvc().perform(post(BASE_URL)
                             .locale(language.getLocale())
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isUnauthorized())
                     .andExpect(jsonPath("$.message")
                             .value(message(
@@ -73,7 +73,7 @@ class AuthControllerTest extends BaseControllerTest {
             mockMvc().perform(post(BASE_URL)
                             .locale(language.getLocale())
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isBadRequest())
                     .andExpect(jsonPath("$.message")
                             .value(message("invalid.method.params", language.getLocale())))

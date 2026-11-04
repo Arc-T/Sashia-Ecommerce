@@ -186,7 +186,7 @@ class CategoryControllerTest extends BaseControllerTest {
 
             mockMvc().perform(post(BASE_URL)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isCreated())
                     .andExpect(header().string("Location", BASE_URL + "/" + NEW_CATEGORY_ID));
 
@@ -213,7 +213,7 @@ class CategoryControllerTest extends BaseControllerTest {
             mockMvc().perform(post(BASE_URL)
                             .locale(language.getLocale())
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isBadRequest())
                     .andExpect(jsonPath("$.message").value(message("invalid.method.params", language.getLocale())))
                     .andExpect(jsonPath("$.details.fieldErrors.name").value(message("category.name.required", language.getLocale())))
@@ -234,7 +234,7 @@ class CategoryControllerTest extends BaseControllerTest {
             mockMvc().perform(post(BASE_URL)
                             .locale(language.getLocale())
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isNotFound())
                     .andExpect(jsonPath("$.message").value(message("category.parentId.not.found", language.getLocale())));
         }
@@ -250,7 +250,7 @@ class CategoryControllerTest extends BaseControllerTest {
 
             mockMvc().perform(post(BASE_URL)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isForbidden());
         }
 
@@ -281,7 +281,7 @@ class CategoryControllerTest extends BaseControllerTest {
 
             mockMvc().perform(put(BASE_URL + "/{id}", EXISTING_CATEGORY_ID)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isNoContent());
 
             // Verify in database
@@ -309,7 +309,7 @@ class CategoryControllerTest extends BaseControllerTest {
 
             mockMvc().perform(put(BASE_URL + "/{id}", NON_EXISTENT_CATEGORY_ID)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isNotFound());
         }
 
@@ -322,7 +322,7 @@ class CategoryControllerTest extends BaseControllerTest {
             mockMvc().perform(put(BASE_URL + "/{id}", EXISTING_CATEGORY_ID)
                             .locale(language.getLocale())
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isBadRequest())
                     .andExpect(jsonPath("$.message").value(message("invalid.method.params", language.getLocale())));
         }
@@ -339,7 +339,7 @@ class CategoryControllerTest extends BaseControllerTest {
             mockMvc().perform(put(BASE_URL + "/{id}", EXISTING_CATEGORY_ID)
                             .locale(language.getLocale())
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isNotFound())
                     .andExpect(jsonPath("$.message").value(message("category.parentId.not.found", language.getLocale())));
         }
@@ -355,7 +355,7 @@ class CategoryControllerTest extends BaseControllerTest {
 
             mockMvc().perform(put(BASE_URL + "/{id}", EXISTING_CATEGORY_ID)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isForbidden());
         }
 

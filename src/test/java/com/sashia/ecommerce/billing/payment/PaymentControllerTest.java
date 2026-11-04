@@ -97,7 +97,7 @@ class PaymentControllerTest extends BaseControllerTest {
 
             mockMvc().perform(post(BASE_URL + "/initiate")
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(body)))
+                            .content(jsonMapper().writeValueAsString(body)))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.gatewayType").value("ZARINPAL"))
                     .andExpect(jsonPath("$.authority").value(MOCK_AUTHORITY))
@@ -115,7 +115,7 @@ class PaymentControllerTest extends BaseControllerTest {
 
             mockMvc().perform(post(BASE_URL + "/initiate")
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(body)))
+                            .content(jsonMapper().writeValueAsString(body)))
                     .andExpect(status().isNotFound());
         }
 
@@ -128,7 +128,7 @@ class PaymentControllerTest extends BaseControllerTest {
 
             mockMvc().perform(post(BASE_URL + "/initiate")
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(body)))
+                            .content(jsonMapper().writeValueAsString(body)))
                     .andExpect(status().isBadRequest());
         }
     }
@@ -166,7 +166,7 @@ class PaymentControllerTest extends BaseControllerTest {
 
             mockMvc().perform(post(BASE_URL + "/verify")
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(body)))
+                            .content(jsonMapper().writeValueAsString(body)))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.status").value("PAID"))
                     .andExpect(jsonPath("$.authority").value(MOCK_AUTHORITY))
@@ -187,7 +187,7 @@ class PaymentControllerTest extends BaseControllerTest {
 
             mockMvc().perform(post(BASE_URL + "/verify")
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(body)))
+                            .content(jsonMapper().writeValueAsString(body)))
                     .andExpect(status().isNotFound());
         }
 
@@ -218,7 +218,7 @@ class PaymentControllerTest extends BaseControllerTest {
 
             mockMvc().perform(post(BASE_URL + "/verify")
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(body)))
+                            .content(jsonMapper().writeValueAsString(body)))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.status").value("FAILED"));
         }
@@ -334,7 +334,7 @@ class PaymentControllerTest extends BaseControllerTest {
 
         mockMvc().perform(post(BASE_URL + "/initiate")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper().writeValueAsString(body)))
+                        .content(jsonMapper().writeValueAsString(body)))
                 .andExpect(status().isOk());
     }
 

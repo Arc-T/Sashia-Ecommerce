@@ -5,7 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.context.MessageSource;
 import org.springframework.test.web.servlet.MockMvc;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
 
 import java.util.Locale;
 
@@ -17,7 +17,7 @@ public abstract class BaseControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private ObjectMapper objectMapper;
+    private JsonMapper jsonMapper;
 
     @Autowired
     private MessageSource messageSource;
@@ -32,8 +32,8 @@ public abstract class BaseControllerTest {
         return mockMvc;
     }
 
-    public ObjectMapper objectMapper() {
-        return objectMapper;
+    public JsonMapper jsonMapper() {
+        return jsonMapper;
     }
 
     private MessageSource messageSource() {

@@ -163,7 +163,7 @@ class TagControllerTest extends BaseControllerTest {
 
             mockMvc().perform(post(BASE_URL)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isCreated())
                     .andExpect(header().string("Location", BASE_URL + "/" + NEW_TAG_ID));
 
@@ -187,7 +187,7 @@ class TagControllerTest extends BaseControllerTest {
 
             mockMvc().perform(post(BASE_URL)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isCreated());
 
             // Verify in database
@@ -206,7 +206,7 @@ class TagControllerTest extends BaseControllerTest {
             mockMvc().perform(post(BASE_URL)
                             .locale(language.getLocale())
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isBadRequest())
                     .andExpect(jsonPath("$.message").value(message("invalid.method.params", language.getLocale())))
                     .andExpect(jsonPath("$.details.fieldErrors.name").value(message("tag.name.required", language.getLocale())));
@@ -221,7 +221,7 @@ class TagControllerTest extends BaseControllerTest {
             mockMvc().perform(post(BASE_URL)
                             .locale(language.getLocale())
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isBadRequest())
                     .andExpect(jsonPath("$.message").value(message("invalid.method.params", language.getLocale())))
                     .andExpect(jsonPath("$.details.fieldErrors.name").value(message("tag.name.required", language.getLocale())));
@@ -236,7 +236,7 @@ class TagControllerTest extends BaseControllerTest {
             mockMvc().perform(post(BASE_URL)
                             .locale(language.getLocale())
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isBadRequest())
                     .andExpect(jsonPath("$.message").value(message("invalid.method.params", language.getLocale())))
                     .andExpect(jsonPath("$.details.fieldErrors.name").value(message("tag.name.required", language.getLocale())));
@@ -250,7 +250,7 @@ class TagControllerTest extends BaseControllerTest {
 
             mockMvc().perform(post(BASE_URL)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isForbidden());
         }
 
@@ -279,7 +279,7 @@ class TagControllerTest extends BaseControllerTest {
 
             mockMvc().perform(put(BASE_URL + "/{id}", EXISTING_TAG_ID)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isNoContent());
 
             // Verify in database
@@ -301,7 +301,7 @@ class TagControllerTest extends BaseControllerTest {
 
             mockMvc().perform(put(BASE_URL + "/{id}", NON_EXISTENT_TAG_ID)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isNotFound());
         }
 
@@ -314,7 +314,7 @@ class TagControllerTest extends BaseControllerTest {
             mockMvc().perform(put(BASE_URL + "/{id}", EXISTING_TAG_ID)
                             .locale(language.getLocale())
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isBadRequest())
                     .andExpect(jsonPath("$.message").value(message("invalid.method.params", language.getLocale())))
                     .andExpect(jsonPath("$.details.fieldErrors.name").value(message("tag.name.required", language.getLocale())));
@@ -329,7 +329,7 @@ class TagControllerTest extends BaseControllerTest {
             mockMvc().perform(put(BASE_URL + "/{id}", EXISTING_TAG_ID)
                             .locale(language.getLocale())
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isBadRequest())
                     .andExpect(jsonPath("$.message").value(message("invalid.method.params", language.getLocale())))
                     .andExpect(jsonPath("$.details.fieldErrors.name").value(message("tag.name.required", language.getLocale())));

@@ -152,7 +152,7 @@ class ProductControllerTest extends BaseControllerTest {
         void shouldCreateProduct() throws Exception {
             String location = mockMvc().perform(post(BASE_URL)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(createRequest(null))))
+                            .content(jsonMapper().writeValueAsString(createRequest(null))))
                     .andExpect(status().isCreated())
                     .andExpect(header().string("Location", startsWith(BASE_URL + "/")))
                     .andReturn().getResponse().getHeader("Location");
@@ -173,7 +173,7 @@ class ProductControllerTest extends BaseControllerTest {
 
             String location = mockMvc().perform(post(BASE_URL)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(createRequest(List.of(second, first)))))
+                            .content(jsonMapper().writeValueAsString(createRequest(List.of(second, first)))))
                     .andExpect(status().isCreated())
                     .andReturn().getResponse().getHeader("Location");
 
@@ -194,7 +194,7 @@ class ProductControllerTest extends BaseControllerTest {
 
             mockMvc().perform(post(BASE_URL)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isBadRequest())
                     .andExpect(jsonPath("$.error").value("VALIDATION_ERROR"));
         }
@@ -208,7 +208,7 @@ class ProductControllerTest extends BaseControllerTest {
 
             mockMvc().perform(post(BASE_URL)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isNotFound());
         }
 
@@ -221,7 +221,7 @@ class ProductControllerTest extends BaseControllerTest {
 
             mockMvc().perform(post(BASE_URL)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isNotFound());
         }
 
@@ -231,7 +231,7 @@ class ProductControllerTest extends BaseControllerTest {
         void shouldReturnForbidden() throws Exception {
             mockMvc().perform(post(BASE_URL)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(createRequest(null))))
+                            .content(jsonMapper().writeValueAsString(createRequest(null))))
                     .andExpect(status().isForbidden());
         }
     }
@@ -255,7 +255,7 @@ class ProductControllerTest extends BaseControllerTest {
 
             mockMvc().perform(put(BASE_URL + "/{id}", id)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isNoContent());
 
             ProductResponse updated = productService.read(id).orElseThrow();
@@ -279,7 +279,7 @@ class ProductControllerTest extends BaseControllerTest {
 
             mockMvc().perform(put(BASE_URL + "/{id}", id)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isNoContent());
 
             assertThat(productService.read(id).orElseThrow().variants()).hasSize(1);
@@ -295,13 +295,13 @@ class ProductControllerTest extends BaseControllerTest {
 
             mockMvc().perform(put(BASE_URL + "/{id}", id)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(updateRequest(null))))
+                            .content(jsonMapper().writeValueAsString(updateRequest(null))))
                     .andExpect(status().isNoContent());
             assertThat(mediaService.readByResource(MediaResourceType.PRODUCT, id)).hasSize(1);
 
             mockMvc().perform(put(BASE_URL + "/{id}", id)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(updateRequest(List.of()))))
+                            .content(jsonMapper().writeValueAsString(updateRequest(List.of()))))
                     .andExpect(status().isNoContent());
             assertThat(mediaService.readByResource(MediaResourceType.PRODUCT, id)).isEmpty();
             assertThat(mediaRepository.findById(mediaId)).isEmpty();
@@ -318,7 +318,7 @@ class ProductControllerTest extends BaseControllerTest {
 
             mockMvc().perform(put(BASE_URL + "/{id}", id)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isNotFound());
         }
 
@@ -328,7 +328,7 @@ class ProductControllerTest extends BaseControllerTest {
         void shouldReturnNotFound() throws Exception {
             mockMvc().perform(put(BASE_URL + "/{id}", NON_EXISTENT_ID)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(updateRequest(null))))
+                            .content(jsonMapper().writeValueAsString(updateRequest(null))))
                     .andExpect(status().isNotFound());
         }
 
@@ -340,7 +340,7 @@ class ProductControllerTest extends BaseControllerTest {
 
             mockMvc().perform(put(BASE_URL + "/{id}", 1L)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isBadRequest());
         }
 
@@ -350,7 +350,7 @@ class ProductControllerTest extends BaseControllerTest {
         void shouldReturnForbidden() throws Exception {
             mockMvc().perform(put(BASE_URL + "/{id}", 1L)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(updateRequest(null))))
+                            .content(jsonMapper().writeValueAsString(updateRequest(null))))
                     .andExpect(status().isForbidden());
         }
     }

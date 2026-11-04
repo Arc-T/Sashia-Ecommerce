@@ -63,7 +63,7 @@ class OrderControllerTest extends BaseControllerTest {
         void shouldCreateOrderWithoutPromotion() throws Exception {
             mockMvc().perform(post(BASE_URL)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(validCheckoutRequest())))
+                            .content(jsonMapper().writeValueAsString(validCheckoutRequest())))
                     .andExpect(status().isCreated())
                     .andExpect(header().string(HttpHeaders.LOCATION,
                             org.hamcrest.Matchers.startsWith(BASE_URL + "/")))
@@ -76,7 +76,7 @@ class OrderControllerTest extends BaseControllerTest {
         void shouldReturnForbidden_whenUserLacksAuthority() throws Exception {
             mockMvc().perform(post(BASE_URL)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(validCheckoutRequest())))
+                            .content(jsonMapper().writeValueAsString(validCheckoutRequest())))
                     .andExpect(status().isForbidden());
         }
 
@@ -94,7 +94,7 @@ class OrderControllerTest extends BaseControllerTest {
             mockMvc().perform(post(BASE_URL)
                             .locale(language.getLocale())
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isNotFound())
                     .andExpect(jsonPath("$.message")
                             .value(message("item.delivery.not.found", language.getLocale())));
@@ -114,7 +114,7 @@ class OrderControllerTest extends BaseControllerTest {
             mockMvc().perform(post(BASE_URL)
                             .locale(language.getLocale())
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isNotFound())
                     .andExpect(jsonPath("$.message")
                             .value(message("item.not.found", language.getLocale())));
@@ -135,7 +135,7 @@ class OrderControllerTest extends BaseControllerTest {
             mockMvc().perform(post(BASE_URL)
                             .locale(language.getLocale())
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     // BusinessRuleException not mapped yet in GlobalExceptionHandler
                     .andExpect(status().isInternalServerError())
                     .andDo(print());
@@ -160,7 +160,7 @@ class OrderControllerTest extends BaseControllerTest {
 
             mockMvc().perform(post(BASE_URL)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isBadRequest());
         }
     }

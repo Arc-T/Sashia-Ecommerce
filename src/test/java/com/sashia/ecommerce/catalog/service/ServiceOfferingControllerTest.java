@@ -198,7 +198,7 @@ class ServiceOfferingControllerTest extends BaseControllerTest {
             // When
             ResultActions result = mockMvc().perform(post(BASE_URL)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper().writeValueAsString(request)));
+                    .content(jsonMapper().writeValueAsString(request)));
 
             // Then
             result.andExpect(status().isCreated())
@@ -228,7 +228,7 @@ class ServiceOfferingControllerTest extends BaseControllerTest {
             // When
             ResultActions result = mockMvc().perform(post(BASE_URL)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper().writeValueAsString(request)));
+                    .content(jsonMapper().writeValueAsString(request)));
 
             // Then
             result.andExpect(status().isCreated());
@@ -247,7 +247,7 @@ class ServiceOfferingControllerTest extends BaseControllerTest {
             // When
             ResultActions result = mockMvc().perform(post(BASE_URL)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper().writeValueAsString(request)));
+                    .content(jsonMapper().writeValueAsString(request)));
 
             // Then
             result.andExpect(status().isCreated());
@@ -267,7 +267,7 @@ class ServiceOfferingControllerTest extends BaseControllerTest {
             ResultActions result = mockMvc().perform(post(BASE_URL)
                     .locale(language.getLocale())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper().writeValueAsString(request)));
+                    .content(jsonMapper().writeValueAsString(request)));
 
             // Then
             result.andExpect(status().isBadRequest())
@@ -290,7 +290,7 @@ class ServiceOfferingControllerTest extends BaseControllerTest {
             ResultActions result = mockMvc().perform(post(BASE_URL)
                     .locale(language.getLocale())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper().writeValueAsString(request)));
+                    .content(jsonMapper().writeValueAsString(request)));
 
             // Then
             result.andExpect(status().isBadRequest())
@@ -310,7 +310,7 @@ class ServiceOfferingControllerTest extends BaseControllerTest {
             ResultActions result = mockMvc().perform(post(BASE_URL)
                     .locale(language.getLocale())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper().writeValueAsString(request)));
+                    .content(jsonMapper().writeValueAsString(request)));
 
             // Then
             result.andExpect(status().isUnprocessableContent())
@@ -329,7 +329,7 @@ class ServiceOfferingControllerTest extends BaseControllerTest {
             // When
             ResultActions result = mockMvc().perform(post(BASE_URL)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper().writeValueAsString(request)));
+                    .content(jsonMapper().writeValueAsString(request)));
 
             // Then
             result.andExpect(status().isForbidden());
@@ -354,7 +354,7 @@ class ServiceOfferingControllerTest extends BaseControllerTest {
             // When
             ResultActions result = mockMvc().perform(put(BASE_URL + "/{id}", EXISTING_SERVICE_ID)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper().writeValueAsString(request)));
+                    .content(jsonMapper().writeValueAsString(request)));
 
             // Then
             result.andExpect(status().isNoContent());
@@ -382,7 +382,7 @@ class ServiceOfferingControllerTest extends BaseControllerTest {
             // When
             ResultActions result = mockMvc().perform(put(BASE_URL + "/{id}", NON_EXISTENT_SERVICE_ID)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper().writeValueAsString(request)));
+                    .content(jsonMapper().writeValueAsString(request)));
 
             // Then
             result.andExpect(status().isUnprocessableContent());
@@ -401,7 +401,7 @@ class ServiceOfferingControllerTest extends BaseControllerTest {
             ResultActions result = mockMvc().perform(put(BASE_URL + "/{id}", EXISTING_SERVICE_ID)
                     .locale(language.getLocale())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper().writeValueAsString(request)));
+                    .content(jsonMapper().writeValueAsString(request)));
 
             // Then
             result.andExpect(status().isUnprocessableEntity())
@@ -421,7 +421,7 @@ class ServiceOfferingControllerTest extends BaseControllerTest {
             ResultActions result = mockMvc().perform(put(BASE_URL + "/{id}", EXISTING_SERVICE_ID)
                     .locale(language.getLocale())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper().writeValueAsString(request)));
+                    .content(jsonMapper().writeValueAsString(request)));
 
             // Then
             result.andExpect(status().isBadRequest()) //TODO: messages for min & max needed
@@ -440,7 +440,7 @@ class ServiceOfferingControllerTest extends BaseControllerTest {
             // When
             ResultActions result = mockMvc().perform(put(BASE_URL + "/{id}", EXISTING_SERVICE_ID)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper().writeValueAsString(request)));
+                    .content(jsonMapper().writeValueAsString(request)));
 
             // Then
             result.andExpect(status().isForbidden());

@@ -167,7 +167,7 @@ class AttributeControllerTest extends BaseControllerTest {
 
             mockMvc().perform(post(BASE_URL)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isCreated())
                     .andExpect(header().string(HttpHeaders.LOCATION, BASE_URL + "/" + NEW_ATTRIBUTE_ID));
 
@@ -199,7 +199,7 @@ class AttributeControllerTest extends BaseControllerTest {
             mockMvc().perform(post(BASE_URL)
                             .locale(language.getLocale())
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString((request))))
+                            .content(jsonMapper().writeValueAsString((request))))
                     .andExpect(status().isBadRequest())
                     .andExpect(jsonPath("$.message")
                             .value(message("invalid.method.params", language.getLocale())))
@@ -229,7 +229,7 @@ class AttributeControllerTest extends BaseControllerTest {
             mockMvc().perform(post(BASE_URL)
                             .locale(language.getLocale())
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isNotFound())
                     .andExpect(jsonPath("$.message")
                             .value(message("category.not.found", language.getLocale())));
@@ -250,7 +250,7 @@ class AttributeControllerTest extends BaseControllerTest {
 
             mockMvc().perform(post(BASE_URL)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isForbidden());
         }
 
@@ -276,7 +276,7 @@ class AttributeControllerTest extends BaseControllerTest {
 
             mockMvc().perform(put(BASE_URL + "/{id}", EXISTING_ATTRIBUTE_ID)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isNoContent());
 
             AttributeResponse updatedAttribute = assertDoesNotThrow(() -> attributeService.read(EXISTING_ATTRIBUTE_ID)
@@ -306,7 +306,7 @@ class AttributeControllerTest extends BaseControllerTest {
 
             mockMvc().perform(put(BASE_URL + "/{id}", NON_EXISTENT_ATTRIBUTE_ID)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isNotFound());
         }
 
@@ -320,7 +320,7 @@ class AttributeControllerTest extends BaseControllerTest {
             mockMvc().perform(put(BASE_URL + "/{id}", EXISTING_ATTRIBUTE_ID)
                             .locale(language.getLocale())
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isBadRequest())
                     .andExpect(jsonPath("$.message").value(message("invalid.method.params", language.getLocale())));
         }
@@ -341,7 +341,7 @@ class AttributeControllerTest extends BaseControllerTest {
             mockMvc().perform(put(BASE_URL + "/{id}", EXISTING_ATTRIBUTE_ID)
                             .locale(language.getLocale())
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(objectMapper().writeValueAsString(request)))
+                            .content(jsonMapper().writeValueAsString(request)))
                     .andExpect(status().isNotFound())
                     .andExpect(jsonPath("$.message").value(message("problemDetail.category.not.found", language.getLocale())));
         }
