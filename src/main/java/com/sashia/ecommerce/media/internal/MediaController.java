@@ -15,19 +15,6 @@ import org.springframework.web.context.request.WebRequest;
 import java.time.Duration;
 import java.util.List;
 
-/**
- * <pre>
- * POST   /media/drafts                          upload files as drafts (multipart)
- * GET    /media/drafts                          my drafts
- * GET    /media                                 search everything                 (manager)
- * GET    /media/{id}                            one media
- * PUT    /media/{id}                            change description / order
- * DELETE /media/{id}                            delete
- * GET    /media/resources/{type}/{id}           saved media of a resource         (public)
- * PUT    /media/resources/{type}/{id}           set the exact ordered media list  (manager)
- * GET    /media/files/{slug}                    the file itself                   (public if saved)
- * </pre>
- */
 @RestController
 @RequestMapping(path = "/media")
 class MediaController {
@@ -41,6 +28,7 @@ class MediaController {
     // ================================ FILES ================================
 
     @GetMapping("/files/{slug:.+}")
+    @PreAuthorize("permitAll()")
     ResponseEntity<Resource> file(@PathVariable String slug, WebRequest request) {
         MediaContent content = mediaService.loadContent(slug);
 
@@ -85,6 +73,7 @@ class MediaController {
     }
 
     @GetMapping("/resources/{resourceType}/{resourceId}")
+    @PreAuthorize("permitAll()")
     ResponseEntity<List<MediaResponse>> readByResource(@PathVariable MediaResourceType resourceType,
                                                        @PathVariable Long resourceId) {
         return ResponseEntity.ok(mediaService.readByResource(resourceType, resourceId));

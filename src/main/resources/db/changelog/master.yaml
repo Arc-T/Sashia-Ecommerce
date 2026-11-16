@@ -101,6 +101,8 @@ databaseChangeLog:
   - include:
       file: db/changelog/changes/media/001-create-table.yaml
   - include:
+      file: db/changelog/changes/media/002-align-media-table-with-entity.yaml
+  - include:
       file: db/changelog/changes/billing/invoice/001-create-table.yaml
   - include:
       file: db/changelog/changes/billing/invoice/item/001-create-table.yaml

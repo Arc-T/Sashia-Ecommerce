@@ -36,6 +36,11 @@ class GlobalExceptionHandler {
         return build(HttpStatus.NOT_FOUND, "RESOURCE_NOT_FOUND", ex.getMessageKey(), ex.getMessageArgs());
     }
 
+    @ExceptionHandler({BusinessRuleException.class, InvalidResourceException.class})
+    ResponseEntity<APIError> handleDomainValidation(APIException ex) {
+        return build(HttpStatus.UNPROCESSABLE_ENTITY, "BUSINESS_RULE_VIOLATION", ex.getMessageKey(), ex.getMessageArgs());
+    }
+
     @ExceptionHandler(AuthorizationDeniedException.class)
     ResponseEntity<APIError> handleAuthorization(AuthorizationDeniedException ex) {
         return build(HttpStatus.FORBIDDEN, "AUTHORIZATION_DENIED", "authorization.invalid", null);

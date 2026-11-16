@@ -47,8 +47,11 @@ class MediaControllerTest extends BaseControllerTest {
     private MediaService mediaService;
 
     @BeforeEach
-    void cleanUp() {
+    void cleanUp() throws Exception {
+        List<Media> existing = mediaRepository.findAll();
         mediaRepository.deleteAll();
+        for (Media media : existing)
+            Files.deleteIfExists(fileOf(media));
     }
 
     // ============================== HELPERS ==============================
@@ -123,7 +126,6 @@ class MediaControllerTest extends BaseControllerTest {
                     .andExpect(jsonPath("$.length()").value(1))
                     .andExpect(jsonPath("$[0].status").value("DRAFT"))
                     .andExpect(jsonPath("$[0].mimeType").value("image/png"))
-                    .andExpect(jsonPath("$[0].type").value("IMAGE"))
                     .andExpect(jsonPath("$[0].width").value(4))
                     .andExpect(jsonPath("$[0].height").value(3))
                     .andExpect(jsonPath("$[0].url", startsWith("/media/files/")));

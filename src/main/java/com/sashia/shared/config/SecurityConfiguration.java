@@ -34,7 +34,9 @@ public class SecurityConfiguration {
     private static final String[] PUBLIC_ENDPOINTS = {
             "/actuator/**",
             "/products/**",
-            "/authentication/**"
+            "/authentication/**",
+            "/media/files/**",
+            "/media/resources/**"
     };
 
     @Bean

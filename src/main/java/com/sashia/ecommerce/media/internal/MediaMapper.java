@@ -5,12 +5,12 @@ import com.sashia.ecommerce.media.dto.MediaResponse;
 
 import java.util.Map;
 
-public final class MediaMapper {
+final class MediaMapper {
 
     /**
      * Public URL prefix of the file endpoint.
      */
-    static final String FILES_PATH = "/media/files/";
+    private static final String FILES_PATH = "/media/files/";
 
     private MediaMapper() {
     }
@@ -22,7 +22,6 @@ public final class MediaMapper {
                 media.getOriginalName(),
                 media.getMimeType(),
                 media.getExtension(),
-//                kindOf(media.getMimeType()),
                 media.getSize(),
                 metadataInt(media.getMetadata(), "width"),
                 metadataInt(media.getMetadata(), "height"),

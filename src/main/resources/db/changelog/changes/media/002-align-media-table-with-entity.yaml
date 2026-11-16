@@ -1,0 +1,71 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1794849084621-1
+      author: Mr.Arc-T
+      comment: Align media persistence with the draft and storage lifecycle.
+      changes:
+        - addColumn:
+            schemaName: media
+            tableName: media
+            columns:
+              - column:
+                  name: storage_key
+                  type: ${short_text.type}
+                  remarks: Relative key used to load and delete the stored file.
+              - column:
+                  name: original_name
+                  type: ${short_text.type}
+                  remarks: Sanitized client-provided display name.
+              - column:
+                  name: owner_id
+                  type: ${id.type}
+                  remarks: User who uploaded the media.
+              - column:
+                  name: display_order
+                  type: ${integer_value.type}
+                  defaultValueNumeric: 0
+                  remarks: Position of the media within its resource.
+              - column:
+                  name: updated_at
+                  type: ${timestamp_value.type}
+                  remarks: Last update timestamp.
+
+        - dropNotNullConstraint:
+            schemaName: media
+            tableName: media
+            columnName: resource_type
+            columnDataType: ${name.type}
+
+        - dropNotNullConstraint:
+            schemaName: media
+            tableName: media
+            columnName: resource_id
+            columnDataType: ${id.type}
+
+        - addUniqueConstraint:
+            schemaName: media
+            tableName: media
+            columnNames: slug
+            constraintName: uk_media_slug
+
+  - changeSet:
+      id: 1794849084621-2
+      author: Mr.Arc-T
+      dbms: h2
+      comment: Allow multiple uploads of identical file content in H2.
+      changes:
+        - dropUniqueConstraint:
+            schemaName: media
+            tableName: media
+            constraintName: CONSTRAINT_4
+
+  - changeSet:
+      id: 1794849084621-3
+      author: Mr.Arc-T
+      dbms: postgresql
+      comment: Allow multiple uploads of identical file content in PostgreSQL.
+      changes:
+        - dropUniqueConstraint:
+            schemaName: media
+            tableName: media
+            constraintName: media_checksum_key
