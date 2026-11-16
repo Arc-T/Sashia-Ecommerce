@@ -35,6 +35,8 @@ logs/
 ### Media ###
 uploads/*
 
+graphify-out/*
+
 src/main/resources/application-prod.yaml
 src/main/resources/db/postgresql.yaml
 src/main/resources/bank/zarinpal.yaml
