@@ -35,7 +35,7 @@ logs/
 ### Media ###
 uploads/*
 
-graphify-out/*
+graphify-out/
 
 src/main/resources/application-prod.yaml
 src/main/resources/db/postgresql.yaml
